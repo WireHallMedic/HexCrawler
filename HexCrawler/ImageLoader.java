@@ -3,6 +3,8 @@ package Hexcrawler;
 import java.io.File;
 import java.util.*;
 import java.awt.image.*;
+import java.awt.event.*;
+import javax.imageio.*;
 
 public class ImageLoader
 {
@@ -18,7 +20,7 @@ public class ImageLoader
       fileList = new Vector<File>();
       File directory = new File(directoryPath);
       
-      File[] files = directory.listFiles(); // returns File objects
+      File[] files = directory.listFiles();
       
       if (files != null) 
       {
@@ -41,7 +43,21 @@ public class ImageLoader
    public Vector<BufferedImage> getImages()
    {
       Vector<BufferedImage> imgList = new Vector<BufferedImage>();
+      BufferedImage img;
       
+      for(File file : fileList)
+      {
+         try
+         {
+            img = ImageIO.read(file);
+            imgList.add(img);
+         } 
+         catch (Exception ex)
+         {
+            System.err.println("Error loading image: " + ex.getMessage());
+            ex.printStackTrace();
+         }
+      }
       return imgList;
    }
 
@@ -49,5 +65,6 @@ public class ImageLoader
    {
       ImageLoader imageLoader = new ImageLoader("./res");
       imageLoader.printFileNames();
+      System.out.println("Total Images: " + imageLoader.getImages().size());
    }
 }
