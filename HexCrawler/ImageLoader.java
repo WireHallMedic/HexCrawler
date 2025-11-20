@@ -5,6 +5,7 @@ import java.util.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
+import HexCrawler.*;
 
 public class ImageLoader
 {
@@ -40,9 +41,9 @@ public class ImageLoader
          System.out.println(file.getName());
    }
    
-   public Vector<BufferedImage> getImages()
+   public Vector<HexImage> getImages()
    {
-      Vector<BufferedImage> imgList = new Vector<BufferedImage>();
+      Vector<HexImage> imgList = new Vector<HexImage>();
       BufferedImage img;
       
       for(File file : fileList)
@@ -50,7 +51,7 @@ public class ImageLoader
          try
          {
             img = ImageIO.read(file);
-            imgList.add(img);
+            imgList.add(new HexImage(img, file.getName()));
          } 
          catch (Exception ex)
          {
