@@ -28,6 +28,6 @@ public class HexImage
    {
       bufferedImage = bi;
       name = n;
-      shortName = name.split(".")[0];
+      shortName = name.split("\\.")[0];
    }
 }
