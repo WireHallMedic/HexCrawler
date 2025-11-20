@@ -1,6 +1,5 @@
 package HexCrawler;
 
-import HexCrawler.*;
 import java.awt.image.*;
 import java.util.*;
 
