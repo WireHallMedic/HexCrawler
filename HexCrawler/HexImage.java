@@ -8,19 +8,26 @@ public class HexImage
 {
 	private BufferedImage bufferedImage;
 	private String name;
+   private String shortName;
 
 
 	public BufferedImage getBufferedImage(){return bufferedImage;}
 	public String getName(){return name;}
-
-
-	public void setBufferedImage(BufferedImage b){bufferedImage = b;}
-	public void setName(String n){name = n;}
+   public String getShortName(){return shortName;}
+   
+   
+   public boolean matches(String searchName)
+   {
+      if(name.equals(searchName) || shortName.equals(searchName))
+         return true;
+      return false;
+   }
    
    
    public HexImage(BufferedImage bi, String n)
    {
       bufferedImage = bi;
       name = n;
+      shortName = name.split(".")[0];
    }
 }

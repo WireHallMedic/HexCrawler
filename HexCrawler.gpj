@@ -13,11 +13,11 @@ s#i0
 s#k0
 s#j0
 s#l0
-!100;g
+!103;g
 %\011HexCrawler%sHexImage.java
-%\011Hexcrawler%sImageLoader.java
+%\011Hexcrawler%sHexImageLoader.java
 %\011HexCrawler%sImagePalette.java
-!100;f
+!103;f
 %\011HexCrawler%sHexImage.java
-%\011Hexcrawler%sImageLoader.java
+%\011Hexcrawler%sHexImageLoader.java
 %\011HexCrawler%sImagePalette.java

@@ -1,17 +1,16 @@
-package Hexcrawler;
+package HexCrawler;
 
 import java.io.File;
 import java.util.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
-import HexCrawler.*;
 
-public class ImageLoader
+public class HexImageLoader
 {
    private Vector<File> fileList;
    
-   public ImageLoader(String directoryPath)
+   public HexImageLoader(String directoryPath)
    {
       loadFiles(directoryPath);
    }
@@ -64,7 +63,7 @@ public class ImageLoader
 
    public static void main(String[] args) 
    {
-      ImageLoader imageLoader = new ImageLoader("./res");
+      HexImageLoader imageLoader = new HexImageLoader("./res");
       imageLoader.printFileNames();
       System.out.println("Total Images: " + imageLoader.getImages().size());
    }
