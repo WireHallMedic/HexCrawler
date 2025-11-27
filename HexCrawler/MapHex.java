@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 
-public class MapHex
+public class MapHex implements HexCrawlerConstants
 {
    private Color background;
 	private BufferedImage image;
@@ -21,5 +21,17 @@ public class MapHex
    {
       background = bg;
       image = img;
+   }
+   
+   public BufferedImage getScaledImage(double scale)
+   {
+      int width = (int)(scale * SQUARE_SIDE);
+      int height = (int)(scale * SQUARE_SIDE);
+      Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+      BufferedImage newBuffered = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = newBuffered.createGraphics();
+      g2d.drawImage(scaledImage, 0, 0 , null);
+      g2d.dispose();
+      return newBuffered;
    }
 }

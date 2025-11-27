@@ -18,6 +18,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants
       for(int x = 0; x < 7; x++)
       for(int y = 0; y < 7; y++)
          hexArray[x][y] = new MapHex(GRASS_COLOR, null);
+      // testing
+      hexArray[3][3].setImage(imagePalette.getImage("grassland"));
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, double scale, int xPos, int yPos)
@@ -26,10 +28,20 @@ public class MapPanel extends JPanel implements HexCrawlerConstants
       double[] yPoints = indentY(xPos, yPos, HEX_POINTS_Y);
       xPoints = scale(scale, xPoints);
       yPoints = scale(scale, yPoints);
+      // draw background
       g2d.setColor(tile.getBackground());
       g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
+      // draw border
       g2d.setColor(Color.BLACK);
       g2d.drawPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
+      // draw image
+      if(tile.getImage() != null)
+      {
+         BufferedImage img = tile.getScaledImage(scale);
+         double xOrigin = getXInset(xPos, yPos) + R_SHORT - (SQUARE_SIDE / 2);
+         double yOrigin = getYInset(xPos, yPos) + R_LONG - (SQUARE_SIDE / 2);
+         g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
+      }
    }
    
    private double[] indentX(int xPos, int yPos, double[] arr)
