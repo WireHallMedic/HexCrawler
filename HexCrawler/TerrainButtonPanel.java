@@ -59,14 +59,12 @@ public class TerrainButtonPanel extends JPanel implements HexCrawlerConstants, C
    public void componentResized(ComponentEvent e)
    {
       setIcons();
-      repaint();
    }
    
-   public void setVisible(boolean v)
+   public void setSize(int x, int y)
    {
-      super.setVisible(v);
+      super.setSize(x, y);
       setIcons();
-      repaint();
    }
    
    public void actionPerformed(ActionEvent ae)

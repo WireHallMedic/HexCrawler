@@ -54,6 +54,8 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       mapPanel.setLocation(0, 0);
       programControlPanel.setLocation(0, mapPanelHeight);
       mapControlPanel.setLocation(mapPanelWidth, 0);
+      
+      mapControlPanel.setIcons();
    }
    
    public void componentHidden(ComponentEvent e){}
