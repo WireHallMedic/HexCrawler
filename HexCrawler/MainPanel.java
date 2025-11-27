@@ -7,7 +7,7 @@ public class MainPanel extends JPanel implements ComponentListener
 {
    private MapPanel mapPanel;
    private JPanel programControlPanel;
-   private JPanel mapControlPanel;
+   private TerrainButtonPanel mapControlPanel;
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
    
@@ -17,7 +17,7 @@ public class MainPanel extends JPanel implements ComponentListener
       setLayout(null);
       mapPanel = new MapPanel(MapOfHexes.mock(), this);
       programControlPanel = new JPanel();
-      mapControlPanel = new JPanel();
+      mapControlPanel = new TerrainButtonPanel();
       
       add(mapPanel);
       add(programControlPanel);
@@ -33,7 +33,7 @@ public class MainPanel extends JPanel implements ComponentListener
       System.out.println("Tile [" + x + ", " + y + "] clicked.");
    }
    
-   private void arrangeElements()
+   public void arrangeElements()
    {
       int width = getWidth();
       int height = getHeight();
@@ -41,7 +41,7 @@ public class MainPanel extends JPanel implements ComponentListener
       int mapPanelHeight = (int)(height * MAP_PANEL_HEIGHT);
       mapPanel.setSize(mapPanelWidth, mapPanelHeight);
       programControlPanel.setSize(width, height - mapPanelHeight);
-      mapControlPanel.setSize(width - mapPanelHeight, height);
+      mapControlPanel.setSize(width - mapPanelWidth, height - programControlPanel.getHeight());
       mapPanel.setLocation(0, 0);
       programControlPanel.setLocation(0, mapPanelHeight);
       mapControlPanel.setLocation(mapPanelWidth, 0);

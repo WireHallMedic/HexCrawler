@@ -13,7 +13,7 @@ s#i0
 s#k0
 s#j0
 s#l0
-!307;g
+!348;g
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
 %\011HexCrawler%sHexImage.java
@@ -23,7 +23,8 @@ s#l0
 %\011HexCrawler%sMapHex.java
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
-!307;f
+%\011HexCrawler%sTerrainButtonPanel.java
+!348;f
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
 %\011HexCrawler%sHexImage.java
@@ -33,5 +34,6 @@ s#l0
 %\011HexCrawler%sMapHex.java
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
+%\011HexCrawler%sTerrainButtonPanel.java
 !36;m
 RunSelect	HexCrawler.HexCrawlerMain
