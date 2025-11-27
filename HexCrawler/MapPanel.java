@@ -15,11 +15,24 @@ public class MapPanel extends JPanel implements HexCrawlerConstants
       super();
       imagePalette = new ImagePalette("./res");
       hexArray = new MapHex[7][7];
+      int i = 0;
       for(int x = 0; x < 7; x++)
       for(int y = 0; y < 7; y++)
+      {
          hexArray[x][y] = new MapHex(GRASS_COLOR, null);
+         setTile(x, y, Terrain.values()[i]);
+         i++;
+         if(i >= Terrain.values().length)
+            i = 0;
+      }
       // testing
       hexArray[3][3].setImage(imagePalette.getImage("grassland"));
+   }
+   
+   public void setTile(int x, int y, Terrain t)
+   {
+      hexArray[x][y].setBackground(t.background);
+      hexArray[x][y].setImage(imagePalette.getImage(t.imageName));
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, double scale, int xPos, int yPos)
