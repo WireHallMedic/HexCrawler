@@ -31,14 +31,13 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       add(programControlPanel);
       add(mapControlPanel);
       
-      arrangeElements();
       addComponentListener(this);
       setVisible(true);
+      arrangeElements();
    }
    
    public void tileClicked(int x, int y)
    {
-      System.out.println("Tile [" + x + ", " + y + "] clicked.");
       hexMap.getTile(x, y).set(Terrain.values()[terrainIndex]);
       mapPanel.repaint();
    }
