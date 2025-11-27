@@ -43,8 +43,8 @@ public interface HexCrawlerConstants
       MOUNTAINS         (MOUNTAIN_COLOR, "mountains"),
       MARSH             (SWAMP_COLOR, "marsh"),
       SWAMP             (SWAMP_COLOR, "swamp"),
-      JUNGLE_LIGHT      (FOREST_COLOR, "junglelight"),
-      JUNGLE            (HEAVY_FOREST_COLOR, "jungle"),
+      JUNGLE            (FOREST_COLOR, "junglelight"),
+      HEAVY_JUNGLE      (HEAVY_FOREST_COLOR, "jungle"),
       JUNGLE_HILLS      (HILL_FOREST_COLOR, "junglehills"),
       JUNGLE_MOUNTAIN   (MOUNTAIN_FOREST_COLOR, "junglemountain"),
       SANDY_DESERT      (DESERT_COLOR, "sandydesert"),
@@ -58,6 +58,11 @@ public interface HexCrawlerConstants
       {
          background = bg;
          imageName = img;
+      }
+      
+      public Terrain getByIndex(int index)
+      {
+         return values()[index];
       }
    }
 }
