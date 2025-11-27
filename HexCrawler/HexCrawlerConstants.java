@@ -70,26 +70,27 @@ public interface HexCrawlerConstants
    
    public enum PointOfInterest
    {
-      NONE        (null),
-      BATTLE      ("battle"),
-      BRIDGE      ("bridge"),
-      CAMP        ("camp"),
-      CASTLE      ("castle"),
-      CAVE        ("cave"),
-      CHURCH      ("church"),
-      CITY        ("city"),
-      FORT        ("fort"),
-      MONOLITH    ("monolith"),
-      MONUMENT    ("monument"),
-      RUINS       ("ruins"),
-      SHIPWRECK   ("shipwreck"),
-      SHRINE      ("shrine"),
-      STAR        ("star"),
-      TEMPLE      ("temple"),
-      TOWER       ("tower"),
-      TOWN        ("town"),
-      VILLAGE     ("village"),
-      X           ("x");
+      NONE           (null),
+      BATTLE         ("battle"),
+      BRIDGE         ("bridge"),
+      CAMP           ("camp"),
+      CASTLE         ("castle"),
+      CAVE           ("cave"),
+      CHURCH         ("church"),
+      CITY           ("city"),
+      FORT           ("fort"),
+      MONOLITH       ("monolith"),
+      MONUMENT       ("monument"),
+      RUINS          ("ruins"),
+      SHIPWRECK      ("shipwreck"),
+      SHRINE         ("shrine"),
+      STAR           ("star"),
+      TEMPLE         ("temple"),
+      TOWER          ("tower"),
+      TOWN           ("town"),
+      VILLAGE        ("village"),
+      X              ("x"),
+      QUESTION_MARK  ("questionmark");
       
       public String imageName;
       
