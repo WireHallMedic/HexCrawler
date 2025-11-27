@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements ComponentListener
    {
       super();
       setLayout(null);
-      mapPanel = new MapPanel(MapOfHexes.mock());
+      mapPanel = new MapPanel(MapOfHexes.mock(), this);
       programControlPanel = new JPanel();
       mapControlPanel = new JPanel();
       
@@ -26,6 +26,11 @@ public class MainPanel extends JPanel implements ComponentListener
       arrangeElements();
       addComponentListener(this);
       setVisible(true);
+   }
+   
+   public void tileClicked(int x, int y)
+   {
+      System.out.println("Tile [" + x + ", " + y + "] clicked.");
    }
    
    private void arrangeElements()

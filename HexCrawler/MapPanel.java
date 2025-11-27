@@ -10,12 +10,14 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
 {
    private double scale = 100.0;
    private MapOfHexes mapOfHexes;
+   private MainPanel parentPanel;
    
-   public MapPanel(MapOfHexes map)
+   public MapPanel(MapOfHexes map, MainPanel parent)
    {
       super();
       setBackground(Color.BLACK);
       mapOfHexes = map;
+      parentPanel = parent;
       
       addMouseListener(this);
    }
@@ -38,9 +40,10 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
             lastX = x;
             lastY = y;
             lastDist = newDist;
-            System.out.println(x + ", " + y);
          }
       }
+      if(lastDist < 1000000.0)
+         parentPanel.tileClicked(lastX, lastY);
    }
    public void mousePressed(MouseEvent me){}
    public void mouseReleased(MouseEvent me){}
