@@ -8,31 +8,16 @@ import javax.swing.*;
 
 public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener
 {
-   private MapHex[][] hexArray;
    private double scale = 100.0;
    private MapOfHexes mapOfHexes;
    
-   public MapPanel()
+   public MapPanel(MapOfHexes map)
    {
       super();
       setBackground(Color.BLACK);
-      hexArray = new MapHex[7][7];
-      int i = 0;
-      for(int y = 0; y < 7; y++)
-      for(int x = 0; x < 7; x++)
-      {
-         hexArray[x][y] = new MapHex(GRASS_COLOR, null);
-         setTile(x, y, Terrain.values()[i]);
-         i++;
-         if(i >= Terrain.values().length)
-            i = 0;
-      }
+      mapOfHexes = map;
+      
       addMouseListener(this);
-   }
-   
-   public void setTile(int x, int y, Terrain t)
-   {
-      hexArray[x][y].set(t);
    }
    
    public void mouseClicked(MouseEvent me)
@@ -42,8 +27,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       int lastX = -1;
       int lastY = -1;
       double lastDist = 1000000.0;
-      for(int x = 0; x < hexArray.length; x++)
-      for(int y = 0; y < hexArray[0].length; y++)
+      for(int x = 0; x < mapOfHexes.getWidth(); x++)
+      for(int y = 0; y < mapOfHexes.getHeight(); y++)
       {
          double newX = mouseLocX - (getXInset(x, y) + (HEX_WIDTH / 2));
          double newY = mouseLocY - (getYInset(x, y) + (HEX_HEIGHT / 2));
@@ -114,8 +99,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    
    public void setScale()
    {
-      double xMult = getWidth() / (((hexArray.length + .5) * HEX_WIDTH));
-      double yMult = getHeight() / ((hexArray[0].length * (R_LONG * 1.5) + (R_LONG / 2)));
+      double xMult = getWidth() / (((mapOfHexes.getWidth() + .5) * HEX_WIDTH));
+      double yMult = getHeight() / ((mapOfHexes.getHeight() * (R_LONG * 1.5) + (R_LONG / 2)));
       scale = Math.min(xMult, yMult);
    }
    
@@ -124,11 +109,11 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    {
       super.paint(g);
       Graphics2D g2d = (Graphics2D)g;
-      int w = hexArray.length;
-      int h = hexArray[0].length;
+      int w = mapOfHexes.getWidth();
+      int h = mapOfHexes.getHeight();
       for(int x = 0; x < w; x++)
       for(int y = 0; y < h; y++)
-         paintHex(g2d, hexArray[x][y], x, y);
+         paintHex(g2d, mapOfHexes.getTile(x, y), x, y);
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, int xPos, int yPos)

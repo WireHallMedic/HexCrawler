@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements ComponentListener
    {
       super();
       setLayout(null);
-      mapPanel = new MapPanel();
+      mapPanel = new MapPanel(MapOfHexes.mock());
       programControlPanel = new JPanel();
       mapControlPanel = new JPanel();
       

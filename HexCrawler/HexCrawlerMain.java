@@ -15,7 +15,7 @@ public class HexCrawlerMain extends JFrame
       mainPanel = new MainPanel();
       add(mainPanel);
       
-      setSize(800, 800);
+      setSize(1100, 800);
       
       setVisible(true);
       repaint();

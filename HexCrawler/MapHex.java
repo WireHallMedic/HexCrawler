@@ -23,6 +23,12 @@ public class MapHex implements HexCrawlerConstants
       image = img;
    }
    
+   public MapHex(Terrain terrain)
+   {
+      this(Color.WHITE, null);
+      set(terrain);
+   }
+   
    public void setImage(Terrain terrain)
    {
       setImage(ImagePalette.getImage(terrain.imageName));

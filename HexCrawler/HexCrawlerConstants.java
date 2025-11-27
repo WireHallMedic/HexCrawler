@@ -67,4 +67,40 @@ public interface HexCrawlerConstants
          return values()[index];
       }
    }
+   
+   public enum PointOfInterest
+   {
+      NONE        (null),
+      BATTLE      ("battle"),
+      BRIDGE      ("bridge"),
+      CAMP        ("camp"),
+      CASTLE      ("castle"),
+      CAVE        ("cave"),
+      CHURCH      ("church"),
+      CITY        ("city"),
+      FORT        ("fort"),
+      MONOLITH    ("monolith"),
+      MONUMENT    ("monument"),
+      RUINS       ("ruins"),
+      SHIPWRECK   ("shipwreck"),
+      SHRINE      ("shrine"),
+      STAR        ("star"),
+      TEMPLE      ("temple"),
+      TOWER       ("tower"),
+      TOWN        ("town"),
+      VILLAGE     ("village"),
+      X           ("x");
+      
+      public String imageName;
+      
+      private PointOfInterest(String img)
+      {
+         imageName = img;
+      }
+      
+      public PointOfInterest getByIndex(int index)
+      {
+         return values()[index];
+      }
+   }
 }
