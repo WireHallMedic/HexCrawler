@@ -3,16 +3,19 @@ package HexCrawler;
 import java.awt.image.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class MapPanel extends JPanel implements HexCrawlerConstants
+public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener
 {
    private ImagePalette imagePalette;
    private MapHex[][] hexArray;
+   private double scale = 100.0;
    
    public MapPanel()
    {
       super();
+      setBackground(Color.BLACK);
       imagePalette = new ImagePalette("./res");
       hexArray = new MapHex[7][7];
       int i = 0;
@@ -35,7 +38,25 @@ public class MapPanel extends JPanel implements HexCrawlerConstants
       hexArray[x][y].setImage(imagePalette.getImage(t.imageName));
    }
    
-   private void paintHex(Graphics2D g2d, MapHex tile, double scale, int xPos, int yPos)
+   public void mouseClicked(MouseEvent me)
+   {
+      double mouseLocX = me.getX() / scale;
+      double mouseLocY = me.getY() / scale;
+      int lastX = -1;
+      int lastY = -1;
+      int lastDist = 1000000;
+      for(int x = 0; x < hexArray.length; x++)
+      for(int y = 0; y < hexArray[0].length; y++)
+      {
+         
+      }
+   }
+   public void mousePressed(MouseEvent me){}
+   public void mouseReleased(MouseEvent me){}
+   public void mouseEntered(MouseEvent me){}
+   public void mouseExited(MouseEvent me){}
+   
+   private void paintHex(Graphics2D g2d, MapHex tile, int xPos, int yPos)
    {
       double[] xPoints = indentX(xPos, yPos, HEX_POINTS_X);
       double[] yPoints = indentY(xPos, yPos, HEX_POINTS_Y);
@@ -116,6 +137,6 @@ public class MapPanel extends JPanel implements HexCrawlerConstants
       int h = hexArray[0].length;
       for(int x = 0; x < w; x++)
       for(int y = 0; y < h; y++)
-         paintHex(g2d, hexArray[x][y], 100, x, y);
+         paintHex(g2d, hexArray[x][y], x, y);
    }
 }
