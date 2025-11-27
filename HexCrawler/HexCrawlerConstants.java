@@ -32,23 +32,25 @@ public interface HexCrawlerConstants
    
    public enum Terrain
    {
+      NONE              (Color.GRAY, null),
       GRASSLAND         (GRASS_COLOR, "grassland"),
       GRASSLAND_HILLS   (GRASS_COLOR, "grasslandhills"),
       LIGHT_FOREST      (FOREST_COLOR, "evergreen"),
-      HEAVY_FOREST      (HEAVY_FOREST_COLOR, "heavyevergreen"),
+      HEAVY_FOREST      (FOREST_COLOR, "heavyevergreen"),
       FORESTED_HILLS    (HILL_FOREST_COLOR, "evergreenhills"),
       FORESTED_MOUNTAIN (MOUNTAIN_FOREST_COLOR, "evergreenmountain"),
-      FARMLAND          (GRASS_COLOR, "farmland"),
-      HILLS             (HILL_COLOR, "hills"),
+      FARMLAND          (GRASS_COLOR, "cultivatedfarmland"),
+      HILLS             (MOUNTAIN_COLOR, "hills"),
       MOUNTAINS         (MOUNTAIN_COLOR, "mountains"),
       MARSH             (SWAMP_COLOR, "marsh"),
       SWAMP             (SWAMP_COLOR, "swamp"),
       JUNGLE            (FOREST_COLOR, "junglelight"),
-      HEAVY_JUNGLE      (HEAVY_FOREST_COLOR, "jungle"),
+      HEAVY_JUNGLE      (FOREST_COLOR, "jungle"),
       JUNGLE_HILLS      (HILL_FOREST_COLOR, "junglehills"),
       JUNGLE_MOUNTAIN   (MOUNTAIN_FOREST_COLOR, "junglemountain"),
       SANDY_DESERT      (DESERT_COLOR, "sandydesert"),
       ROCKY_DESERT      (DESERT_COLOR, "rockydesert"),
+      TUNDRA            (TUNDRA_COLOR, "snowfields"),
       WATER             (WATER_COLOR, null);
       
       public Color background;

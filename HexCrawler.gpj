@@ -13,21 +13,23 @@ s#i0
 s#k0
 s#j0
 s#l0
-!242;g
+!275;g
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
 %\011HexCrawler%sHexImage.java
 %\011HexCrawler%sHexImageLoader.java
 %\011HexCrawler%sImagePalette.java
 %\011HexCrawler%sMapHex.java
+%\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
-!242;f
+!275;f
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
 %\011HexCrawler%sHexImage.java
 %\011HexCrawler%sHexImageLoader.java
 %\011HexCrawler%sImagePalette.java
 %\011HexCrawler%sMapHex.java
+%\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
 !36;m
-RunSelect	HexCrawler.HexCrawlerMain
+RunSelect	HexCrawler.HexImageLoader

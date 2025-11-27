@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener
 {
-   private ImagePalette imagePalette;
    private MapHex[][] hexArray;
    private double scale = 100.0;
    
@@ -16,11 +15,10 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    {
       super();
       setBackground(Color.BLACK);
-      imagePalette = new ImagePalette("./res");
       hexArray = new MapHex[7][7];
       int i = 0;
-      for(int x = 0; x < 7; x++)
       for(int y = 0; y < 7; y++)
+      for(int x = 0; x < 7; x++)
       {
          hexArray[x][y] = new MapHex(GRASS_COLOR, null);
          setTile(x, y, Terrain.values()[i]);
@@ -28,14 +26,12 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          if(i >= Terrain.values().length)
             i = 0;
       }
-      // testing
-      hexArray[3][3].setImage(imagePalette.getImage("grassland"));
    }
    
    public void setTile(int x, int y, Terrain t)
    {
       hexArray[x][y].setBackground(t.background);
-      hexArray[x][y].setImage(imagePalette.getImage(t.imageName));
+      hexArray[x][y].setImage(ImagePalette.getImage(t.imageName));
    }
    
    public void mouseClicked(MouseEvent me)

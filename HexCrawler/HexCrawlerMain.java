@@ -9,14 +9,15 @@ public class HexCrawlerMain extends JFrame
    public HexCrawlerMain()
    {
       super();
+      ImagePalette.load("./res");
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
       mapPanel = new MapPanel();
       add(mapPanel);
       
       setSize(800, 800);
-      setVisible(true);
       
+      setVisible(true);
       repaint();
    }
    

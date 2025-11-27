@@ -5,20 +5,20 @@ import java.util.*;
 
 public class ImagePalette
 {
-   private Vector<HexImage> imageList;
+   private static Vector<HexImage> imageList = null;
    
-   public ImagePalette(String directoryPath)
+   public static void load(String directoryPath)
    {
       HexImageLoader loader = new HexImageLoader(directoryPath);
       imageList = loader.getImages();
    }
    
-   public Vector<HexImage> getImageList()
+   public static Vector<HexImage> getImageList()
    {
       return imageList;
    }
    
-   public BufferedImage getImage(String name)
+   public static BufferedImage getImage(String name)
    {
       for(HexImage img : imageList)
       {
