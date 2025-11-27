@@ -30,8 +30,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    
    public void setTile(int x, int y, Terrain t)
    {
-      hexArray[x][y].setBackground(t.background);
-      hexArray[x][y].setImage(ImagePalette.getImage(t.imageName));
+      hexArray[x][y].set(t);
    }
    
    public void mouseClicked(MouseEvent me)

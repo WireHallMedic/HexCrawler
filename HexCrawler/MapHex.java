@@ -23,6 +23,17 @@ public class MapHex implements HexCrawlerConstants
       image = img;
    }
    
+   public void setImage(Terrain terrain)
+   {
+      setImage(ImagePalette.getImage(terrain.imageName));
+   }
+   
+   public void set(Terrain terrain)
+   {
+      setBackground(terrain.background);
+      setImage(terrain);
+   }
+   
    public BufferedImage getScaledImage(double scale)
    {
       int width = (int)(scale * SQUARE_SIDE);
