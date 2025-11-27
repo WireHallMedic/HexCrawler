@@ -11,17 +11,17 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private TerrainButtonPanel mapControlPanel;
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
-   private int clickIndex; // what happens when you left click
+   private int terrainIndex; // what happens when you left click
    
-   public void setClickIndex(int ci){clickIndex = ci;}
+   public void setTerrainIndex(int ci){terrainIndex = ci;}
    
-   public int getClickIndex(){return clickIndex;}
+   public int getTerrainIndex(){return terrainIndex;}
    
    public MainPanel()
    {
       super();
       hexMap = MapOfHexes.mock();
-      clickIndex = 0;
+      terrainIndex = 0;
       setLayout(null);
       mapPanel = new MapPanel(hexMap, this);
       programControlPanel = new JPanel();
@@ -39,7 +39,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    public void tileClicked(int x, int y)
    {
       System.out.println("Tile [" + x + ", " + y + "] clicked.");
-      hexMap.getTile(x, y).set(Terrain.values()[clickIndex]);
+      hexMap.getTile(x, y).set(Terrain.values()[terrainIndex]);
       mapPanel.repaint();
    }
    
