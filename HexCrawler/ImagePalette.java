@@ -9,7 +9,7 @@ public class ImagePalette
    
    public ImagePalette(String directoryPath)
    {
-      HexImageLoader loader = new HexImageLoader("./res");
+      HexImageLoader loader = new HexImageLoader(directoryPath);
       imageList = loader.getImages();
    }
    

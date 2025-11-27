@@ -4,10 +4,11 @@ import java.awt.*;
 
 public interface HexCrawlerConstants
 {
-   public static final double R_LONG = 0.5;
-   public static final double R_SHORT = Math.cos(Math.PI/6.0) * R_LONG;
+   public static final double R_LONG = 0.5;  // long radius of hex, also edge length of hex
+   public static final double R_SHORT = Math.cos(Math.PI/6.0) * R_LONG; // short radius of hex
    public static final double HEX_WIDTH = 2.0 * R_SHORT;
    public static final double HEX_HEIGHT = 1.0;
+   public static final double SQUARE_SIDE = R_LONG * (3 - Math.sqrt(3));
    public static final double X_STEP = HEX_WIDTH;
    public static final double Y_STEP = .75;
    public static final double ODD_X_INSET = R_SHORT;
