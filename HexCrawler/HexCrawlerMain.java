@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class HexCrawlerMain extends JFrame
 {
-   private MapPanel mapPanel;
+   private MainPanel mainPanel;
    
    public HexCrawlerMain()
    {
@@ -12,8 +12,8 @@ public class HexCrawlerMain extends JFrame
       ImagePalette.load("./res");
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
-      mapPanel = new MapPanel();
-      add(mapPanel);
+      mainPanel = new MainPanel();
+      add(mainPanel);
       
       setSize(800, 800);
       

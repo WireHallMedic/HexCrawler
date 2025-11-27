@@ -112,6 +112,13 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       return yPos * Y_STEP;
    }
    
+   public void setScale()
+   {
+      double xMult = getWidth() / (((hexArray.length + .5) * HEX_WIDTH));
+      double yMult = getHeight() / ((hexArray[0].length * (R_LONG * 1.5) + (R_LONG / 2)));
+      scale = Math.min(xMult, yMult);
+   }
+   
    @Override
    public void paint(Graphics g)
    {
