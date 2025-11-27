@@ -10,6 +10,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
 {
    private MapHex[][] hexArray;
    private double scale = 100.0;
+   private MapOfHexes mapOfHexes;
    
    public MapPanel()
    {
