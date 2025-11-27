@@ -3,21 +3,29 @@ package HexCrawler;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class MainPanel extends JPanel implements ComponentListener
+public class MainPanel extends JPanel implements ComponentListener, HexCrawlerConstants
 {
+   private MapOfHexes hexMap;
    private MapPanel mapPanel;
    private JPanel programControlPanel;
    private TerrainButtonPanel mapControlPanel;
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
+   private int clickIndex; // what happens when you left click
+   
+   public void setClickIndex(int ci){clickIndex = ci;}
+   
+   public int getClickIndex(){return clickIndex;}
    
    public MainPanel()
    {
       super();
+      hexMap = MapOfHexes.mock();
+      clickIndex = 0;
       setLayout(null);
-      mapPanel = new MapPanel(MapOfHexes.mock(), this);
+      mapPanel = new MapPanel(hexMap, this);
       programControlPanel = new JPanel();
-      mapControlPanel = new TerrainButtonPanel();
+      mapControlPanel = new TerrainButtonPanel(this);
       
       add(mapPanel);
       add(programControlPanel);
@@ -31,6 +39,8 @@ public class MainPanel extends JPanel implements ComponentListener
    public void tileClicked(int x, int y)
    {
       System.out.println("Tile [" + x + ", " + y + "] clicked.");
+      hexMap.getTile(x, y).set(Terrain.values()[clickIndex]);
+      mapPanel.repaint();
    }
    
    public void arrangeElements()
