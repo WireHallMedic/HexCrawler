@@ -29,4 +29,35 @@ public interface HexCrawlerConstants
    public static final Color WATER_COLOR = new Color(152, 204, 251);
    public static final Color MOUNTAIN_FOREST_COLOR = new Color(102, 118, 33);
    public static final Color HILL_FOREST_COLOR = new Color(72, 138, 33);
+   
+   public enum Terrain
+   {
+      GRASSLAND         (GRASS_COLOR, "grassland"),
+      GRASSLAND_HILLS   (GRASS_COLOR, "grasslandhills"),
+      LIGHT_FOREST      (FOREST_COLOR, "evergreen"),
+      HEAVY_FOREST      (HEAVY_FOREST_COLOR, "heavyevergreen"),
+      FORESTED_HILLS    (HILL_FOREST_COLOR, "evergreenhills"),
+      FORESTED_MOUNTAIN (MOUNTAIN_FOREST_COLOR, "evergreenmountain"),
+      FARMLAND          (GRASS_COLOR, "farmland"),
+      HILLS             (HILL_COLOR, "hills"),
+      MOUNTAINS         (MOUNTAIN_COLOR, "mountains"),
+      MARSH             (SWAMP_COLOR, "marsh"),
+      SWAMP             (SWAMP_COLOR, "swamp"),
+      JUNGLE_LIGHT      (FOREST_COLOR, "junglelight"),
+      JUNGLE            (HEAVY_FOREST_COLOR, "jungle"),
+      JUNGLE_HILLS      (HILL_FOREST_COLOR, "junglehills"),
+      JUNGLE_MOUNTAIN   (MOUNTAIN_FOREST_COLOR, "junglemountain"),
+      SANDY_DESERT      (DESERT_COLOR, "sandydesert"),
+      ROCKY_DESERT      (DESERT_COLOR, "rockydesert"),
+      WATER             (WATER_COLOR, null);
+      
+      public Color background;
+      public String imageName;
+      
+      private Terrain(Color bg, String img)
+      {
+         background = bg;
+         imageName = img;
+      }
+   }
 }
