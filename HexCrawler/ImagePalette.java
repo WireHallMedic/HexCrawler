@@ -20,11 +20,14 @@ public class ImagePalette
    
    public static BufferedImage getImage(String name)
    {
+      if(name == null)
+         return null;
       for(HexImage img : imageList)
       {
          if(img.matches(name))
             return img.getBufferedImage();
       }
+      System.out.println("Could not find image '" + name + "'");
       return null;
    }
 }

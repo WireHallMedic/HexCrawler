@@ -47,15 +47,22 @@ public class HexImageLoader
       
       for(File file : fileList)
       {
-         try
+         if(file.exists())
          {
-            img = ImageIO.read(file);
-            imgList.add(new HexImage(img, file.getName()));
-         } 
-         catch (Exception ex)
+            try
+            {
+               img = ImageIO.read(file);
+               imgList.add(new HexImage(img, file.getName()));
+            } 
+            catch (Exception ex)
+            {
+               System.out.println("Error loading image: " + ex.getMessage());
+               ex.printStackTrace();
+            }
+         }
+         else
          {
-            System.err.println("Error loading image: " + ex.getMessage());
-            ex.printStackTrace();
+            System.out.println("Non-existant file: " + file.getName());
          }
       }
       return imgList;

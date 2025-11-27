@@ -51,6 +51,16 @@ public class MapHex implements HexCrawlerConstants
       setImage(ImagePalette.getImage(terrain.imageName));
    }
    
+   public void setBigImage(PointOfInterest poi)
+   {
+      setBigImage(ImagePalette.getImage(poi.imageName));
+   }
+   
+   public void setSmallImage(PointOfInterest poi)
+   {
+      setSmallImage(ImagePalette.getImage(poi.imageName));
+   }
+   
    public void set(Terrain terrain)
    {
       setBackground(terrain.background);
@@ -73,7 +83,7 @@ public class MapHex implements HexCrawlerConstants
    {
       if(smallImage == null)
          return null;
-      return getScaledInstance(scale, smallImage);
+      return getScaledInstance(scale / 2.0, smallImage);
    }
    
    private BufferedImage getScaledInstance(double scale, BufferedImage original)

@@ -59,7 +59,6 @@ public class MapOfHexes implements HexCrawlerConstants
       int w = 9;
       int h = 9;
       MapOfHexes map = new MapOfHexes(w, h);
-      MapHex[][] hexArray = new MapHex[w][h];
       int i = 0;
       for(int y = 0; y < h; y++)
       for(int x = 0; x < w; x++)
@@ -69,6 +68,9 @@ public class MapOfHexes implements HexCrawlerConstants
          if(i >= Terrain.values().length)
             i = 0;
       }
+      map.tileArray[1][0].setBigImage(PointOfInterest.TOWN);
+      map.tileArray[2][0].setSmallImage(PointOfInterest.X);
+      
       return map;
    }
 }
