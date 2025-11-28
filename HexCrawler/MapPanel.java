@@ -136,24 +136,29 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       // draw image
       double xOrigin = getXInset(xPos, yPos) + R_SHORT - (SQUARE_SIDE / 2);
       double yOrigin = getYInset(xPos, yPos) + R_LONG - (SQUARE_SIDE / 2);
-      if(tile.getImage() != null)
+      if(!parentPanel.explorationMode || tile.isExplored())
       {
-         BufferedImage img = tile.getScaledImage(scale);
-         g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
-      }
-      // draw big PoI
-      if(tile.getBigImage() != null)
-      {
-         BufferedImage img = tile.getScaledBigImage(scale);
-         g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
-      }
-      // draw small PoI
-      if(tile.getSmallImage() != null)
-      {
-         double smallImageXOrigin = xOrigin + (SQUARE_SIDE / 4);
-         double smallImageYOrigin = yOrigin + (SQUARE_SIDE * .75);
-         BufferedImage img = tile.getScaledSmallImage(scale);
-         g2d.drawImage(img, (int)(smallImageXOrigin * scale), (int)(smallImageYOrigin * scale), null);
+         {
+            if(tile.getImage() != null)
+            {
+               BufferedImage img = tile.getScaledImage(scale);
+               g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
+            }
+         }
+         // draw big PoI
+         if(tile.getBigImage() != null)
+         {
+            BufferedImage img = tile.getScaledBigImage(scale);
+            g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
+         }
+         // draw small PoI
+         if(tile.getSmallImage() != null)
+         {
+            double smallImageXOrigin = xOrigin + (SQUARE_SIDE / 4);
+            double smallImageYOrigin = yOrigin + (SQUARE_SIDE * .75);
+            BufferedImage img = tile.getScaledSmallImage(scale);
+            g2d.drawImage(img, (int)(smallImageXOrigin * scale), (int)(smallImageYOrigin * scale), null);
+         }
       }
    }
 }

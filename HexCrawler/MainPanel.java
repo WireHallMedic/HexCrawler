@@ -46,8 +46,11 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       int iconIndex = 0;
       if(explorationMode)
       {
-         hexMap.getTile(x, y).setSeen(true);
-         repaint();
+         if(leftClick)
+            hexMap.getTile(x, y).setSeen(true);
+         else
+            hexMap.getTile(x, y).setExplored(true);
+         mapPanel.repaint();
          return;
       }
       if(mapControlPanel.terrainMode())
