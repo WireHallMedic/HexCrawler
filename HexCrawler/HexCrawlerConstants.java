@@ -27,6 +27,7 @@ public interface HexCrawlerConstants
    public static final Color TUNDRA_COLOR = new Color(255, 255, 255);
    public static final Color DESERT_COLOR = new Color(240, 225, 113);
    public static final Color WATER_COLOR = new Color(152, 204, 251);
+   public static final Color ROAD_COLOR = new Color(73, 32, 0);
    public static final Color MOUNTAIN_FOREST_COLOR = new Color(102, 118, 33);
    public static final Color HILL_FOREST_COLOR = new Color(72, 138, 33);
    
