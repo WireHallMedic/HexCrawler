@@ -99,4 +99,9 @@ public class MapHex implements HexCrawlerConstants
       g2d.dispose();
       return newBuffered;
    }
+   
+   public BufferedImage getUnexploredImage(double scale)
+   {
+      return getScaledInstance(scale / 2.0, ImagePalette.getImage("questionmark"));
+   }
 }

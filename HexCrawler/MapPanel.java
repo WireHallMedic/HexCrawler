@@ -132,11 +132,13 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
       // draw border
       g2d.setColor(Color.BLACK);
+      if(parentPanel.explorationMode)
+         g2d.setColor(Color.GRAY);
       g2d.drawPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
       // draw image
       double xOrigin = getXInset(xPos, yPos) + R_SHORT - (SQUARE_SIDE / 2);
       double yOrigin = getYInset(xPos, yPos) + R_LONG - (SQUARE_SIDE / 2);
-      if(!parentPanel.explorationMode || tile.isExplored())
+      if(!parentPanel.explorationMode || tile.isSeen())
       {
          {
             if(tile.getImage() != null)
@@ -145,20 +147,32 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
                g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
             }
          }
+      }
+      if(!parentPanel.explorationMode || tile.isExplored())
+      {
          // draw big PoI
          if(tile.getBigImage() != null)
          {
             BufferedImage img = tile.getScaledBigImage(scale);
             g2d.drawImage(img, (int)(xOrigin * scale), (int)(yOrigin * scale), null);
          }
-         // draw small PoI
-         if(tile.getSmallImage() != null)
-         {
-            double smallImageXOrigin = xOrigin + (SQUARE_SIDE / 4);
-            double smallImageYOrigin = yOrigin + (SQUARE_SIDE * .75);
-            BufferedImage img = tile.getScaledSmallImage(scale);
-            g2d.drawImage(img, (int)(smallImageXOrigin * scale), (int)(smallImageYOrigin * scale), null);
-         }
+      }
+      // draw small PoI
+      BufferedImage smallImage = tile.getSmallImage();
+      if(parentPanel.explorationMode && tile.isSeen() && !tile.isExplored())
+         smallImage = tile.getUnexploredImage(scale);
+      else
+      {
+         if(tile.getSmallImage() == null)
+            smallImage = null;
+         else
+            smallImage = tile.getScaledSmallImage(scale);
+      }
+      if(smallImage != null)
+      {
+         double smallImageXOrigin = xOrigin + (SQUARE_SIDE / 4);
+         double smallImageYOrigin = yOrigin + (SQUARE_SIDE * .75);
+         g2d.drawImage(smallImage, (int)(smallImageXOrigin * scale), (int)(smallImageYOrigin * scale), null);
       }
    }
 }
