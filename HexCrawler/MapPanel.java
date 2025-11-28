@@ -9,14 +9,12 @@ import javax.swing.*;
 public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener
 {
    private double scale = 100.0;
-   private MapOfHexes mapOfHexes;
    private MainPanel parentPanel;
    
    public MapPanel(MapOfHexes map, MainPanel parent)
    {
       super();
       setBackground(Color.BLACK);
-      mapOfHexes = map;
       parentPanel = parent;
       
       addMouseListener(this);
@@ -30,8 +28,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       int lastX = -1;
       int lastY = -1;
       double lastDist = 1000000.0;
-      for(int x = 0; x < mapOfHexes.getWidth(); x++)
-      for(int y = 0; y < mapOfHexes.getHeight(); y++)
+      for(int x = 0; x < parentPanel.getMap().getWidth(); x++)
+      for(int y = 0; y < parentPanel.getMap().getHeight(); y++)
       {
          double newX = mouseLocX - (getXInset(x, y) + (HEX_WIDTH / 2));
          double newY = mouseLocY - (getYInset(x, y) + (HEX_HEIGHT / 2));
@@ -103,8 +101,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    
    public void setScale()
    {
-      double xMult = getWidth() / (((mapOfHexes.getWidth() + .5) * HEX_WIDTH));
-      double yMult = getHeight() / ((mapOfHexes.getHeight() * (R_LONG * 1.5) + (R_LONG / 2)));
+      double xMult = getWidth() / (((parentPanel.getMap().getWidth() + .5) * HEX_WIDTH));
+      double yMult = getHeight() / ((parentPanel.getMap().getHeight() * (R_LONG * 1.5) + (R_LONG / 2)));
       scale = Math.min(xMult, yMult);
    }
    
@@ -112,12 +110,13 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    public void paint(Graphics g)
    {
       super.paint(g);
+      setScale();
       Graphics2D g2d = (Graphics2D)g;
-      int w = mapOfHexes.getWidth();
-      int h = mapOfHexes.getHeight();
+      int w = parentPanel.getMap().getWidth();
+      int h = parentPanel.getMap().getHeight();
       for(int x = 0; x < w; x++)
       for(int y = 0; y < h; y++)
-         paintHex(g2d, mapOfHexes.getTile(x, y), x, y);
+         paintHex(g2d, parentPanel.getMap().getTile(x, y), x, y);
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, int xPos, int yPos)

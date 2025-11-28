@@ -108,7 +108,6 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    public void componentResized(ComponentEvent e)
    {
       arrangeElements();
-      mapPanel.setScale();
       repaint();
    }
    
