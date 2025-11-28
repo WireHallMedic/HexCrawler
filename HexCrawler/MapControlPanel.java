@@ -20,7 +20,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    private JPanel terrainPanel;
    private JPanel bigPoIPanel;
    private JPanel smallPoIPanel;
-   private JPanel riverRoadPanel;
+   private RiverRoadPanel riverRoadPanel;
    private JPanel explorationPanel;
    private JPanel[] panelArray;
    private int rows;
@@ -98,9 +98,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       smallPoIPanel.setVisible(false);
       add(smallPoIPanel);
       
-      riverRoadPanel = new JPanel();
-      riverRoadPanel.setLayout(new GridLayout(rows - 1, 1));
-      riverRoadPanel.add(new JLabel("Not yet implemented"));
+      riverRoadPanel = new RiverRoadPanel(parentPanel);
       riverRoadPanel.setVisible(false);
       add(riverRoadPanel);
       

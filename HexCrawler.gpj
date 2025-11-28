@@ -13,7 +13,7 @@ s#i0
 s#k0
 s#j0
 s#l0
-!454;g
+!491;g
 %\011HexCrawler%sFileManager.java
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
@@ -27,7 +27,8 @@ s#l0
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
 %\011HexCrawler%sProgramControlPanel.java
-!454;f
+%\011HexCrawler%sRiverRoadPanel.java
+!491;f
 %\011HexCrawler%sFileManager.java
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
@@ -41,5 +42,6 @@ s#l0
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
 %\011HexCrawler%sProgramControlPanel.java
+%\011HexCrawler%sRiverRoadPanel.java
 !36;m
 RunSelect	HexCrawler.HexCrawlerMain
