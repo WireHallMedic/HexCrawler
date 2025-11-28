@@ -24,12 +24,12 @@ public class MapOfHexes implements HexCrawlerConstants
    public MapOfHexes(int w, int h)
    {
       setSize(w, h);
+      pathList = new Vector<LinearPath>();
    }
    
    public MapOfHexes()
    {
       this(7, 7);
-      pathList = new Vector<LinearPath>();
    }
    
    public void setSize(int w, int h)
@@ -79,6 +79,16 @@ public class MapOfHexes implements HexCrawlerConstants
       }
    }
    
+   public void addPath(LinearPath path)
+   {
+      pathList.add(path);
+   }
+   
+   public void clearPaths()
+   {
+      pathList = new Vector<LinearPath>();
+   }
+   
    public static MapOfHexes mock()
    {
       int w = 9;
@@ -96,16 +106,7 @@ public class MapOfHexes implements HexCrawlerConstants
       map.tileArray[1][0].setBigImage(PointOfInterest.TOWN);
       map.tileArray[2][0].setSmallImage(PointOfInterest.X);
       
+      map.addPath(LinearPath.mock());
       return map;
-   }
-   
-   public void addPath(LinearPath path)
-   {
-      pathList.add(path);
-   }
-   
-   public void clearPaths()
-   {
-      pathList = new Vector<LinearPath>();
    }
 }

@@ -45,7 +45,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       arrangeElements();
    }
    
-   public void tileClicked(int x, int y, boolean leftClick)
+   public void tileClicked(int x, int y, boolean leftClick, double mouseLocX, double mouseLocY)
    {
       int iconIndex = 0;
       if(explorationMode)

@@ -42,7 +42,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          }
       }
       if(lastDist < 1000000.0)
-         parentPanel.tileClicked(lastX, lastY, leftClick);
+         parentPanel.tileClicked(lastX, lastY, leftClick, mouseLocX, mouseLocY);
    }
    public void mousePressed(MouseEvent me){}
    public void mouseReleased(MouseEvent me){}
@@ -117,6 +117,18 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       for(int x = 0; x < w; x++)
       for(int y = 0; y < h; y++)
          paintHex(g2d, parentPanel.getMap().getTile(x, y), x, y);
+      Vector<LinearPath> pathList = parentPanel.getMap().getPathList();
+      if(pathList != null)
+         for(LinearPath path : pathList)
+         {
+            path.paint(g2d, this, scale);
+         }
+      // paint over roads and rivers
+      if(parentPanel.explorationMode)
+         for(int x = 0; x < w; x++)
+         for(int y = 0; y < h; y++)
+            if(!parentPanel.getMap().getTile(x, y).isSeen())
+               paintHex(g2d, parentPanel.getMap().getTile(x, y), x, y);
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, int xPos, int yPos)
@@ -127,8 +139,9 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       yPoints = scale(scale, yPoints);
       // draw background
       g2d.setColor(tile.getBackground());
-      if(!parentPanel.explorationMode || tile.isSeen())
-         g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
+      if(parentPanel.explorationMode && !tile.isSeen())
+         g2d.setColor(Color.BLACK);
+      g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
       // draw border
       g2d.setColor(Color.BLACK);
       if(parentPanel.explorationMode)
