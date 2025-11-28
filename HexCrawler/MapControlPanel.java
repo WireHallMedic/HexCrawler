@@ -187,29 +187,26 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
          if(ae.getSource() == terrainRB)
          {
             terrainPanel.setVisible(true);
-            return;
          }
          if(ae.getSource() == smallPoIRB)
          {
             smallPoIPanel.setVisible(true);
-            return;
          }
          if(ae.getSource() == bigPoIRB)
          {
             bigPoIPanel.setVisible(true);
-            return;
          }
          if(ae.getSource() == riverRoadRB)
          {
             riverRoadPanel.setVisible(true);
-            return;
          }
          if(ae.getSource() == explorationRB)
          {
             explorationPanel.setVisible(true);
             parentPanel.explorationMode = true;
-            return;
          }
+         parentPanel.repaint();
+         return;
       }
       for(int i = 0; i < terrainButtonArray.length; i++)
       {

@@ -128,7 +128,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       yPoints = scale(scale, yPoints);
       // draw background
       g2d.setColor(tile.getBackground());
-      g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
+      if(!parentPanel.explorationMode || tile.isSeen())
+         g2d.fillPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
       // draw border
       g2d.setColor(Color.BLACK);
       g2d.drawPolygon(doubleToInt(xPoints), doubleToInt(yPoints), xPoints.length);
