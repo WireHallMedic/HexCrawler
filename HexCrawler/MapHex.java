@@ -7,35 +7,32 @@ import java.util.*;
 public class MapHex implements HexCrawlerConstants
 {
 	private Color background;
-	private BufferedImage image;
-	private BufferedImage bigImage;
-	private BufferedImage smallImage;
+	private HexImage image;
+	private HexImage bigImage;
+	private HexImage smallImage;
 	private boolean seen;
 	private boolean explored;
 
 
 	public Color getBackground(){return background;}
-	public BufferedImage getImage(){return image;}
-	public BufferedImage getBigImage(){return bigImage;}
-	public BufferedImage getSmallImage(){return smallImage;}
+	public BufferedImage getImage(){return image.getBufferedImage();}
+	public BufferedImage getBigImage(){return bigImage.getBufferedImage();}
+	public BufferedImage getSmallImage(){return smallImage.getBufferedImage();}
 	public boolean isSeen(){return seen;}
 	public boolean isExplored(){return explored;}
 
 
 	public void setBackground(Color b){background = b;}
-	public void setImage(BufferedImage i){image = i;}
-	public void setBigImage(BufferedImage b){bigImage = b;}
-	public void setSmallImage(BufferedImage s){smallImage = s;}
 	public void setSeen(boolean s){seen = s;}
 	public void setExplored(boolean e){explored = e;}
 
 
-   public MapHex(Color bg, BufferedImage img)
+   public MapHex(Color bg, Terrain t)
    {
       background = bg;
-      image = img;
-      bigImage = null;
-      smallImage = null;
+      image = new HexImage(null, null);
+      bigImage = new HexImage(null, null);
+      smallImage = new HexImage(null, null);
       seen = false;
       explored = false;
    }
@@ -48,17 +45,26 @@ public class MapHex implements HexCrawlerConstants
    
    public void setImage(Terrain terrain)
    {
-      setImage(ImagePalette.getImage(terrain.imageName));
+      if(terrain == null)
+         image = new HexImage(null, "null");
+      else
+         image = new HexImage(ImagePalette.getImage(terrain.imageName), terrain.imageName);
    }
    
    public void setBigImage(PointOfInterest poi)
    {
-      setBigImage(ImagePalette.getImage(poi.imageName));
+      if(poi == null)
+         bigImage = new HexImage(null, "null");
+      else
+         bigImage = new HexImage(ImagePalette.getImage(poi.imageName), poi.imageName);
    }
    
    public void setSmallImage(PointOfInterest poi)
    {
-      setSmallImage(ImagePalette.getImage(poi.imageName));
+      if(poi == null)
+         smallImage = new HexImage(null, "null");
+      else
+         smallImage = new HexImage(ImagePalette.getImage(poi.imageName), poi.imageName);
    }
    
    public void set(Terrain terrain)
@@ -69,21 +75,26 @@ public class MapHex implements HexCrawlerConstants
    
    public BufferedImage getScaledImage(double scale)
    {
-      return getScaledInstance(scale, image);
+      return getScaledInstance(scale, getImage());
    }
    
    public BufferedImage getScaledBigImage(double scale)
    {
       if(bigImage == null)
          return null;
-      return getScaledInstance(scale, bigImage);
+      return getScaledInstance(scale, getBigImage());
    }
    
    public BufferedImage getScaledSmallImage(double scale)
    {
       if(smallImage == null)
          return null;
-      return getScaledInstance(scale / 2.0, smallImage);
+      return getScaledInstance(scale / 2.0, getSmallImage());
+   }
+   
+   public BufferedImage getUnexploredImage(double scale)
+   {
+      return getScaledInstance(scale / 2.0, ImagePalette.getImage("questionmark"));
    }
    
    private BufferedImage getScaledInstance(double scale, BufferedImage original)
@@ -98,10 +109,5 @@ public class MapHex implements HexCrawlerConstants
       g2d.drawImage(scaledImage, 0, 0 , null);
       g2d.dispose();
       return newBuffered;
-   }
-   
-   public BufferedImage getUnexploredImage(double scale)
-   {
-      return getScaledInstance(scale / 2.0, ImagePalette.getImage("questionmark"));
    }
 }

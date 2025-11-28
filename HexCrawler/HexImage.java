@@ -28,6 +28,9 @@ public class HexImage
    {
       bufferedImage = bi;
       name = n;
-      shortName = name.split("\\.")[0];
+      if(n != null)
+         shortName = name.split("\\.")[0];
+      else
+         shortName = n;
    }
 }
