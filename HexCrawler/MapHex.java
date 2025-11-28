@@ -12,6 +12,7 @@ public class MapHex implements HexCrawlerConstants
 	private HexImage smallImage;
 	private boolean seen;
 	private boolean explored;
+   private static final String DELIMITER = "@@";
 
 
 	public Color getBackground(){return background;}
@@ -109,5 +110,22 @@ public class MapHex implements HexCrawlerConstants
       g2d.drawImage(scaledImage, 0, 0 , null);
       g2d.dispose();
       return newBuffered;
+   }
+   
+   public String serialize()
+   {
+      String outStr = image.getShortName() + DELIMITER;
+      outStr += bigImage.getShortName() + DELIMITER;
+      outStr += smallImage.getShortName() + DELIMITER;
+      if(seen)
+         outStr += "t";
+      else
+         outStr += "f";
+      outStr += DELIMITER;
+      if(explored)
+         outStr += "t";
+      else
+         outStr += "f";
+      return outStr;
    }
 }
