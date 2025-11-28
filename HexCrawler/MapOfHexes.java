@@ -7,19 +7,18 @@ public class MapOfHexes implements HexCrawlerConstants
 	private MapHex[][] tileArray;
 	private int width;
 	private int height;
-   private LinearPath[] pathList;
+   private Vector<LinearPath> pathList;
 
 
 	public MapHex[][] getTileArray(){return tileArray;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
-   public LinearPath getPath(int i){return pathList[i];}
+   public Vector<LinearPath> getPathList(){return pathList;}
 
 
 	public void setTileArray(MapHex[][] t){tileArray = t;}
 	public void setWidth(int w){width = w;}
 	public void setHeight(int h){height = h;}
-   public void setPath(LinearPath path, int i){pathList[i] = path;}
 
 
    public MapOfHexes(int w, int h)
@@ -30,9 +29,7 @@ public class MapOfHexes implements HexCrawlerConstants
    public MapOfHexes()
    {
       this(7, 7);
-      pathList = new LinearPath[MAX_LINEAR_PATHS];
-      for(int i = 0; i < pathList.length; i++)
-         pathList[i] = new LinearPath();
+      pathList = new Vector<LinearPath>();
    }
    
    public void setSize(int w, int h)
@@ -100,5 +97,15 @@ public class MapOfHexes implements HexCrawlerConstants
       map.tileArray[2][0].setSmallImage(PointOfInterest.X);
       
       return map;
+   }
+   
+   public void addPath(LinearPath path)
+   {
+      pathList.add(path);
+   }
+   
+   public void clearPaths()
+   {
+      pathList = new Vector<LinearPath>();
    }
 }
