@@ -26,6 +26,5 @@ public class HexCrawlerMain extends JFrame
    public static void main(String[] args)
    {
       HexCrawlerMain main = new HexCrawlerMain();
-      
    }
 }

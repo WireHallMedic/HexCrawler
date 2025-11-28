@@ -9,7 +9,23 @@ public class FileManager
 {
    public static void load(MainPanel mainPanel)
    {
-   
+		Scanner inFile = null;
+      String fileName = "HexCrawler.dat";
+      Vector<String> strList = new Vector<String>();
+		try
+		{
+			inFile = new Scanner(new FileReader(fileName));
+		}
+		catch(Exception ex)
+		{
+			String errorMessage = "Error: Cannot read from " + fileName;
+			JOptionPane.showMessageDialog(null, errorMessage, "Exception Occured", JOptionPane.ERROR_MESSAGE);
+		   return;
+      }
+		while(inFile.hasNext() == true)
+			strList.add(inFile.nextLine());
+		inFile.close();
+      mainPanel.getMap().deserialize(strList);
    }
    
    public static void save(MainPanel mainPanel)
@@ -17,8 +33,6 @@ public class FileManager
       try
       {
          Vector<String> saveList = mainPanel.getMap().serialize();
-         for(String str : saveList)
-            System.out.println(str);
          PrintWriter writer = new PrintWriter("HexCrawler.dat", "UTF-8");
          for(String str : saveList)
             writer.println(str);
@@ -26,7 +40,8 @@ public class FileManager
       }
       catch(Exception ex)
       {
-         System.out.println("Failed to save\n" + ex.toString());
+			String errorMessage = ex.toString();
+			JOptionPane.showMessageDialog(null, errorMessage, "Exception Occured", JOptionPane.ERROR_MESSAGE);
       }
    }
 }

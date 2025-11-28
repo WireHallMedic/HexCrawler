@@ -72,7 +72,7 @@ public class MapOfHexes implements HexCrawlerConstants
       setSize(w, h);
       for(int i = 0; i < strList.size() - 2; i++)
       {
-         tileArray[i / width][i % height].deserialize(strList.elementAt(i));
+         tileArray[i / width][i % height].deserialize(strList.elementAt(i + 2));
       }
    }
    

@@ -70,9 +70,9 @@ public interface HexCrawlerConstants
       public static Terrain getByName(String str)
       {
          for(Terrain t : Terrain.values())
-            if(t.imageName.equals(str))
+            if(str.equals(t.imageName))
                return t;
-         return null;
+         return NONE;
       }
    }
    
@@ -115,9 +115,9 @@ public interface HexCrawlerConstants
       public static PointOfInterest getByName(String str)
       {
          for(PointOfInterest poi : PointOfInterest.values())
-            if(poi.imageName.equals(str))
+            if(str.equals(poi.imageName))
                return poi;
-         return null;
+         return NONE;
       }
    }
 }
