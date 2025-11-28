@@ -14,6 +14,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private int terrainIndex; // what happens when you left click
    private int bigPoIIndex;
    private int smallPoIIndex;
+   public static boolean explorationMode = false;
    
    public void setTerrainIndex(int ci){terrainIndex = ci;}
    public void setBigPoIIndex(int pi){bigPoIIndex = pi;}

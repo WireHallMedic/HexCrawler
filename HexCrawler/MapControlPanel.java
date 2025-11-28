@@ -15,9 +15,14 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    private JRadioButton terrainRB;
    private JRadioButton bigPoIRB;
    private JRadioButton smallPoIRB;
-   private JPanel terrainButtonPanel;
+   private JRadioButton riverRoadRB;
+   private JRadioButton explorationRB;
+   private JPanel terrainPanel;
    private JPanel bigPoIPanel;
    private JPanel smallPoIPanel;
+   private JPanel riverRoadPanel;
+   private JPanel explorationPanel;
+   private JPanel[] panelArray;
    private int rows;
    
    public boolean terrainMode(){return terrainRB.isSelected();}
@@ -34,34 +39,42 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
          rows++;
       
       radioPanel = new JPanel();
-      radioPanel.setLayout(new GridLayout(1, 3));
+      radioPanel.setLayout(new GridLayout(2, 3));
       terrainRB = new JRadioButton("Terrain");
       bigPoIRB = new JRadioButton("Big Icon");
       smallPoIRB = new JRadioButton("Small Icon");
+      riverRoadRB = new JRadioButton("River/Road");
+      explorationRB = new JRadioButton("Exploration");
       ButtonGroup bg = new ButtonGroup();
       bg.add(terrainRB);
+      bg.add(riverRoadRB);
       bg.add(bigPoIRB);
+      bg.add(explorationRB);
       bg.add(smallPoIRB);
       terrainRB.addActionListener(this);
       bigPoIRB.addActionListener(this);
       smallPoIRB.addActionListener(this);
+      riverRoadRB.addActionListener(this);
+      explorationRB.addActionListener(this);
       terrainRB.setSelected(true);
       radioPanel.add(terrainRB);
       radioPanel.add(bigPoIRB);
       radioPanel.add(smallPoIRB);
+      radioPanel.add(riverRoadRB);
+      radioPanel.add(explorationRB);
       radioPanel.setVisible(true);
       add(radioPanel);
       
-      terrainButtonPanel = new JPanel();
-      terrainButtonPanel.setLayout(new GridLayout(rows - 1, 2));
+      terrainPanel = new JPanel();
+      terrainPanel.setLayout(new GridLayout(rows - 1, 2));
       terrainButtonArray = new JButton[Terrain.values().length];
       for(int i = 0; i < terrainButtonArray.length; i++)
       {
          terrainButtonArray[i] = getButton(Terrain.values()[i]);
-         terrainButtonPanel.add(terrainButtonArray[i]);
+         terrainPanel.add(terrainButtonArray[i]);
       }
-      terrainButtonPanel.setVisible(true);
-      add(terrainButtonPanel);
+      terrainPanel.setVisible(true);
+      add(terrainPanel);
       
       bigPoIPanel = new JPanel();
       bigPoIPanel.setLayout(new GridLayout(rows - 1, 2));
@@ -84,6 +97,27 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       }
       smallPoIPanel.setVisible(false);
       add(smallPoIPanel);
+      
+      riverRoadPanel = new JPanel();
+      riverRoadPanel.setLayout(new GridLayout(rows - 1, 1));
+      riverRoadPanel.add(new JLabel("Not yet implemented"));
+      riverRoadPanel.setVisible(false);
+      add(riverRoadPanel);
+      
+      explorationPanel = new JPanel();
+      explorationPanel.setLayout(new GridLayout(rows - 1, 1));
+      explorationPanel.add(new JLabel("Left-click to see"));
+      explorationPanel.add(new JLabel("Right-click to explore"));
+      explorationPanel.add(new JLabel("Shift-click to obscure"));
+      explorationPanel.setVisible(false);
+      add(explorationPanel);
+      
+      panelArray = new JPanel[5];
+      panelArray[0] = terrainPanel;
+      panelArray[1] = bigPoIPanel;
+      panelArray[2] = smallPoIPanel;
+      panelArray[3] = riverRoadPanel;
+      panelArray[4] = explorationPanel;
       
       addComponentListener(this);
       setVisible(true);
@@ -145,26 +179,37 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    
    public void actionPerformed(ActionEvent ae)
    {
-      if(ae.getSource() == terrainRB)
+      if(ae.getSource() instanceof JRadioButton)
       {
-         terrainButtonPanel.setVisible(true);
-         bigPoIPanel.setVisible(false);
-         smallPoIPanel.setVisible(false);
-         return;
-      }
-      if(ae.getSource() == smallPoIRB)
-      {
-         terrainButtonPanel.setVisible(false);
-         bigPoIPanel.setVisible(false);
-         smallPoIPanel.setVisible(true);
-         return;
-      }
-      if(ae.getSource() == bigPoIRB)
-      {
-         terrainButtonPanel.setVisible(false);
-         bigPoIPanel.setVisible(true);
-         smallPoIPanel.setVisible(false);
-         return;
+         parentPanel.explorationMode = false;
+         for(JPanel p : panelArray)
+            p.setVisible(false);
+         if(ae.getSource() == terrainRB)
+         {
+            terrainPanel.setVisible(true);
+            return;
+         }
+         if(ae.getSource() == smallPoIRB)
+         {
+            smallPoIPanel.setVisible(true);
+            return;
+         }
+         if(ae.getSource() == bigPoIRB)
+         {
+            bigPoIPanel.setVisible(true);
+            return;
+         }
+         if(ae.getSource() == riverRoadRB)
+         {
+            riverRoadPanel.setVisible(true);
+            return;
+         }
+         if(ae.getSource() == explorationRB)
+         {
+            explorationPanel.setVisible(true);
+            parentPanel.explorationMode = true;
+            return;
+         }
       }
       for(int i = 0; i < terrainButtonArray.length; i++)
       {
@@ -197,11 +242,10 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       int radioPanelHeight = getHeight() / rows;
       radioPanel.setSize(getWidth(), radioPanelHeight);
       radioPanel.setLocation(0, 0);
-      terrainButtonPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
-      terrainButtonPanel.setLocation(0, radioPanelHeight);
-      bigPoIPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
-      bigPoIPanel.setLocation(0, radioPanelHeight);
-      smallPoIPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
-      smallPoIPanel.setLocation(0, radioPanelHeight);
+      for(JPanel p : panelArray)
+      {
+         p.setSize(getWidth(), getHeight() - radioPanelHeight);
+         p.setLocation(0, radioPanelHeight);
+      }
    }
 }
