@@ -65,6 +65,17 @@ public class MapOfHexes implements HexCrawlerConstants
       return outList;
    }
    
+   public void deserialize(Vector<String> strList)
+   {
+      int w = Integer.parseInt(strList.elementAt(0));
+      int h = Integer.parseInt(strList.elementAt(1));
+      setSize(w, h);
+      for(int i = 0; i < strList.size() - 2; i++)
+      {
+         tileArray[i / width][i % height].deserialize(strList.elementAt(i));
+      }
+   }
+   
    public static MapOfHexes mock()
    {
       int w = 9;

@@ -128,4 +128,20 @@ public class MapHex implements HexCrawlerConstants
          outStr += "f";
       return outStr;
    }
+   
+   public void deserialize(String str)
+   {
+      String[] strList = str.split(DELIMITER);
+      set(Terrain.getByName(strList[0]));
+      setBigImage(PointOfInterest.getByName(strList[1]));
+      setSmallImage(PointOfInterest.getByName(strList[2]));
+      if(strList[3].equals("t"))
+         seen = true;
+      else
+         seen = false;
+      if(strList[4].equals("t"))
+         explored = true;
+      else
+         explored = false;
+   }
 }

@@ -66,6 +66,14 @@ public interface HexCrawlerConstants
       {
          return values()[index];
       }
+      
+      public static Terrain getByName(String str)
+      {
+         for(Terrain t : Terrain.values())
+            if(t.imageName.equals(str))
+               return t;
+         return null;
+      }
    }
    
    public enum PointOfInterest
@@ -102,6 +110,14 @@ public interface HexCrawlerConstants
       public PointOfInterest getByIndex(int index)
       {
          return values()[index];
+      }
+      
+      public static PointOfInterest getByName(String str)
+      {
+         for(PointOfInterest poi : PointOfInterest.values())
+            if(poi.imageName.equals(str))
+               return poi;
+         return null;
       }
    }
 }
