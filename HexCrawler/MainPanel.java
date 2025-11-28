@@ -12,16 +12,20 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
    private int terrainIndex; // what happens when you left click
+   private int bigPoIIndex;
+   private int smallPoIIndex;
    
    public void setTerrainIndex(int ci){terrainIndex = ci;}
-   
-   public int getTerrainIndex(){return terrainIndex;}
+   public void setBigPoIIndex(int pi){bigPoIIndex = pi;}
+   public void setSmallPoIIndex(int pi){smallPoIIndex = pi;}
    
    public MainPanel()
    {
       super();
       hexMap = MapOfHexes.mock();
       terrainIndex = 0;
+      bigPoIIndex = 0;
+      smallPoIIndex = 0;
       setLayout(null);
       mapPanel = new MapPanel(hexMap, this);
       programControlPanel = new JPanel();
@@ -36,9 +40,27 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       arrangeElements();
    }
    
-   public void tileClicked(int x, int y)
+   public void tileClicked(int x, int y, boolean leftClick)
    {
-      hexMap.getTile(x, y).set(Terrain.values()[terrainIndex]);
+      int iconIndex = 0;
+      if(mapControlPanel.terrainMode())
+      {
+         if(leftClick)
+            iconIndex = terrainIndex;
+         hexMap.getTile(x, y).set(Terrain.values()[iconIndex]);
+      }
+      else if(mapControlPanel.bigPoIMode())
+      {
+         if(leftClick)
+            iconIndex = bigPoIIndex;
+         hexMap.getTile(x, y).setBigImage(PointOfInterest.values()[iconIndex]);
+      }
+      else if(mapControlPanel.smallPoIMode())
+      {
+         if(leftClick)
+            iconIndex = smallPoIIndex;
+         hexMap.getTile(x, y).setSmallImage(PointOfInterest.values()[iconIndex]);
+      }
       mapPanel.repaint();
    }
    

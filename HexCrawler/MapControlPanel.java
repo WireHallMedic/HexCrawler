@@ -8,6 +8,8 @@ import java.awt.event.*;
 public class MapControlPanel extends JPanel implements HexCrawlerConstants, ComponentListener, ActionListener
 {
    private JButton[] terrainButtonArray;
+   private JButton[] bigPoIButtonArray;
+   private JButton[] smallPoIButtonArray;
    private MainPanel parentPanel;
    private JPanel radioPanel;
    private JRadioButton terrainRB;
@@ -20,7 +22,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    
    public boolean terrainMode(){return terrainRB.isSelected();}
    public boolean bigPoIMode(){return bigPoIRB.isSelected();}
-   public boolean samllPoIMode(){return smallPoIRB.isSelected();}
+   public boolean smallPoIMode(){return smallPoIRB.isSelected();}
    
    public MapControlPanel(MainPanel panel)
    {
@@ -62,10 +64,24 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       add(terrainButtonPanel);
       
       bigPoIPanel = new JPanel();
+      bigPoIPanel.setLayout(new GridLayout(rows - 1, 2));
+      bigPoIButtonArray = new JButton[PointOfInterest.values().length];
+      for(int i = 0; i < bigPoIButtonArray.length; i++)
+      {
+         bigPoIButtonArray[i] = getButton(PointOfInterest.values()[i]);
+         bigPoIPanel.add(bigPoIButtonArray[i]);
+      }
       bigPoIPanel.setVisible(false);
       add(bigPoIPanel);
       
       smallPoIPanel = new JPanel();
+      smallPoIPanel.setLayout(new GridLayout(rows - 1, 2));
+      smallPoIButtonArray = new JButton[PointOfInterest.values().length];
+      for(int i = 0; i < bigPoIButtonArray.length; i++)
+      {
+         smallPoIButtonArray[i] = getButton(PointOfInterest.values()[i]);
+         smallPoIPanel.add(smallPoIButtonArray[i]);
+      }
       smallPoIPanel.setVisible(false);
       add(smallPoIPanel);
       
@@ -81,6 +97,13 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       return button;
    }
    
+   private JButton getButton(PointOfInterest poi)
+   {
+      JButton button = new JButton();
+      button.addActionListener(this);
+      return button;
+   }
+   
    public void setIcons()
    {
       for(int i = 0; i < terrainButtonArray.length; i++)
@@ -92,6 +115,20 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
             img = ImagePalette.scaleToPixelSize(img, getHeight() / rows);
             if(img != null)
                terrainButtonArray[i].setIcon(new ImageIcon(img));
+         }
+      }
+      for(int i = 0; i < bigPoIButtonArray.length; i++)
+      {
+         PointOfInterest poi = PointOfInterest.values()[i];
+         BufferedImage img = ImagePalette.getImage(poi.imageName);
+         if(img != null)
+         {
+            img = ImagePalette.scaleToPixelSize(img, getHeight() / rows);
+            if(img != null)
+            {
+               bigPoIButtonArray[i].setIcon(new ImageIcon(img));
+               smallPoIButtonArray[i].setIcon(new ImageIcon(img));
+            }
          }
       }
       repaint();
@@ -113,22 +150,46 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
          terrainButtonPanel.setVisible(true);
          bigPoIPanel.setVisible(false);
          smallPoIPanel.setVisible(false);
+         return;
       }
-      else if(ae.getSource() == smallPoIRB)
+      if(ae.getSource() == smallPoIRB)
       {
          terrainButtonPanel.setVisible(false);
          bigPoIPanel.setVisible(false);
          smallPoIPanel.setVisible(true);
+         return;
       }
-      else if(ae.getSource() == bigPoIRB)
+      if(ae.getSource() == bigPoIRB)
       {
          terrainButtonPanel.setVisible(false);
          bigPoIPanel.setVisible(true);
          smallPoIPanel.setVisible(false);
+         return;
       }
-      else for(int i = 0; i < terrainButtonArray.length; i++)
+      for(int i = 0; i < terrainButtonArray.length; i++)
+      {
          if(ae.getSource() == terrainButtonArray[i])
+         {
             parentPanel.setTerrainIndex(i);
+            return;
+         }
+      }
+      for(int i = 0; i < bigPoIButtonArray.length; i++)
+      {
+         if(ae.getSource() == bigPoIButtonArray[i])
+         {
+            parentPanel.setBigPoIIndex(i);
+            return;
+         }
+      }
+      for(int i = 0; i < smallPoIButtonArray.length; i++)
+      {
+         if(ae.getSource() == smallPoIButtonArray[i])
+         {
+            parentPanel.setSmallPoIIndex(i);
+            return;
+         }
+      }
    }
    
    public void arrangeElements()

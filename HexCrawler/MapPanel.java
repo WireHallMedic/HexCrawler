@@ -24,6 +24,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    
    public void mouseClicked(MouseEvent me)
    {
+      boolean leftClick = me.getButton() == MouseEvent.BUTTON1;
       double mouseLocX = me.getX() / scale;
       double mouseLocY = me.getY() / scale;
       int lastX = -1;
@@ -43,7 +44,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          }
       }
       if(lastDist < 1000000.0)
-         parentPanel.tileClicked(lastX, lastY);
+         parentPanel.tileClicked(lastX, lastY, leftClick);
    }
    public void mousePressed(MouseEvent me){}
    public void mouseReleased(MouseEvent me){}
