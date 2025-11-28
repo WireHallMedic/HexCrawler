@@ -54,6 +54,17 @@ public class MapOfHexes implements HexCrawlerConstants
       return null;
    }
    
+   public Vector<String> serialize()
+   {
+      Vector<String> outList = new Vector<String>();
+      outList.add("" + width);
+      outList.add("" + height);
+      for(int x = 0; x < width; x++)
+      for(int y = 0; y < height; y++)
+         outList.add(tileArray[x][y].serialize());
+      return outList;
+   }
+   
    public static MapOfHexes mock()
    {
       int w = 9;

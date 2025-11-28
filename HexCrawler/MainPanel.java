@@ -7,7 +7,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
 {
    private MapOfHexes hexMap;
    private MapPanel mapPanel;
-   private JPanel programControlPanel;
+   private ProgramControlPanel programControlPanel;
    private MapControlPanel mapControlPanel;
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
@@ -21,6 +21,8 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    public void setBigPoIIndex(int pi){bigPoIIndex = pi;}
    public void setSmallPoIIndex(int pi){smallPoIIndex = pi;}
    
+   public MapOfHexes getMap(){return hexMap;}
+   
    public MainPanel()
    {
       super();
@@ -30,7 +32,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       smallPoIIndex = 0;
       setLayout(null);
       mapPanel = new MapPanel(hexMap, this);
-      programControlPanel = new JPanel();
+      programControlPanel = new ProgramControlPanel(this);
       mapControlPanel = new MapControlPanel(this);
       
       add(mapPanel);
@@ -120,5 +122,22 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    {
       if(ke.getKeyCode() == KeyEvent.VK_SHIFT)
          shiftDown = false;
+   }
+   
+   public void save()
+   {
+      FileManager.save(this);
+   }
+   
+   public void load()
+   {
+      FileManager.load(this);
+      mapPanel.repaint();
+   }
+   
+   public void newMap()
+   {
+      hexMap = new MapOfHexes();
+      mapPanel.repaint();
    }
 }

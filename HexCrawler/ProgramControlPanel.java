@@ -9,10 +9,12 @@ public class ProgramControlPanel extends JPanel implements ActionListener
    private JButton newB;
    private JButton saveB;
    private JButton loadB;
+   private MainPanel parentPanel;
    
-   public ProgramControlPanel()
+   public ProgramControlPanel(MainPanel parent)
    {
       super();
+      parentPanel = parent;
       setLayout(new GridLayout(1, 4));
       newB = new JButton("New Map");
       newB.addActionListener(this);
@@ -27,6 +29,11 @@ public class ProgramControlPanel extends JPanel implements ActionListener
    
    public void actionPerformed(ActionEvent ae)
    {
-   
+      if(ae.getSource() == newB)
+         parentPanel.newMap();
+      else if(ae.getSource() == saveB)
+         parentPanel.save();
+      else if(ae.getSource() == loadB)
+         parentPanel.load();
    }
 }
