@@ -8,7 +8,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private MapOfHexes hexMap;
    private MapPanel mapPanel;
    private JPanel programControlPanel;
-   private TerrainButtonPanel mapControlPanel;
+   private MapControlPanel mapControlPanel;
    private double MAP_PANEL_WIDTH = .75;
    private double MAP_PANEL_HEIGHT = .9;
    private int terrainIndex; // what happens when you left click
@@ -25,7 +25,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       setLayout(null);
       mapPanel = new MapPanel(hexMap, this);
       programControlPanel = new JPanel();
-      mapControlPanel = new TerrainButtonPanel(this);
+      mapControlPanel = new MapControlPanel(this);
       
       add(mapPanel);
       add(programControlPanel);
@@ -55,6 +55,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       programControlPanel.setLocation(0, mapPanelHeight);
       mapControlPanel.setLocation(mapPanelWidth, 0);
       
+      mapControlPanel.arrangeElements();
       mapControlPanel.setIcons();
    }
    

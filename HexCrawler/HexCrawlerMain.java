@@ -17,6 +17,7 @@ public class HexCrawlerMain extends JFrame
       
       setSize(1100, 800);
       
+      mainPanel.arrangeElements();
       setVisible(true);
       repaint();
    }
@@ -24,5 +25,6 @@ public class HexCrawlerMain extends JFrame
    public static void main(String[] args)
    {
       HexCrawlerMain main = new HexCrawlerMain();
+      
    }
 }
