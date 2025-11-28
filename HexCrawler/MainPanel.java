@@ -44,6 +44,12 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    public void tileClicked(int x, int y, boolean leftClick)
    {
       int iconIndex = 0;
+      if(explorationMode)
+      {
+         hexMap.getTile(x, y).setSeen(true);
+         repaint();
+         return;
+      }
       if(mapControlPanel.terrainMode())
       {
          if(leftClick)
