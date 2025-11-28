@@ -20,6 +20,7 @@ public class HexCrawlerMain extends JFrame
       mainPanel.arrangeElements();
       setVisible(true);
       repaint();
+      mainPanel.grabFocus();
    }
    
    public static void main(String[] args)

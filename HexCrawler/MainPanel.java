@@ -3,7 +3,7 @@ package HexCrawler;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class MainPanel extends JPanel implements ComponentListener, HexCrawlerConstants
+public class MainPanel extends JPanel implements ComponentListener, HexCrawlerConstants, KeyListener
 {
    private MapOfHexes hexMap;
    private MapPanel mapPanel;
@@ -15,6 +15,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private int bigPoIIndex;
    private int smallPoIIndex;
    public static boolean explorationMode = false;
+   private boolean shiftDown = false;
    
    public void setTerrainIndex(int ci){terrainIndex = ci;}
    public void setBigPoIIndex(int pi){bigPoIIndex = pi;}
@@ -37,6 +38,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       add(mapControlPanel);
       
       addComponentListener(this);
+      addKeyListener(this);
       setVisible(true);
       arrangeElements();
    }
@@ -46,10 +48,17 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       int iconIndex = 0;
       if(explorationMode)
       {
-         if(leftClick)
-            hexMap.getTile(x, y).setSeen(true);
+         if(shiftDown)
+         {
+            hexMap.getTile(x, y).setSeen(false);
+            hexMap.getTile(x, y).setExplored(false);
+         }
          else
-            hexMap.getTile(x, y).setExplored(true);
+         {
+            hexMap.getTile(x, y).setSeen(true);
+            if(!leftClick)
+               hexMap.getTile(x, y).setExplored(true);
+         }
          mapPanel.repaint();
          return;
       }
@@ -99,5 +108,17 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       arrangeElements();
       mapPanel.setScale();
       repaint();
+   }
+   
+   public void keyTyped(KeyEvent ke){}
+   public void keyPressed(KeyEvent ke)
+   {
+      if(ke.getKeyCode() == KeyEvent.VK_SHIFT)
+         shiftDown = true;
+   }
+   public void keyReleased(KeyEvent ke)
+   {
+      if(ke.getKeyCode() == KeyEvent.VK_SHIFT)
+         shiftDown = false;
    }
 }

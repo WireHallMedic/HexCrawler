@@ -121,6 +121,8 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       
       addComponentListener(this);
       setVisible(true);
+      
+      setAllUnfocusable();
    }
    
    private JButton getButton(Terrain t)
@@ -204,6 +206,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
          {
             explorationPanel.setVisible(true);
             parentPanel.explorationMode = true;
+            parentPanel.grabFocus();
          }
          parentPanel.repaint();
          return;
@@ -243,6 +246,17 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       {
          p.setSize(getWidth(), getHeight() - radioPanelHeight);
          p.setLocation(0, radioPanelHeight);
+      }
+   }
+   
+   private void setAllUnfocusable()
+   {
+      Component[] components;
+      for(JPanel panel : panelArray)
+      {
+         components = panel.getComponents();
+         for(Component component : components)
+            component.setFocusable(false);
       }
    }
 }
