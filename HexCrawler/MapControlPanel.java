@@ -14,7 +14,13 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    private JRadioButton bigPoIRB;
    private JRadioButton smallPoIRB;
    private JPanel terrainButtonPanel;
+   private JPanel bigPoIPanel;
+   private JPanel smallPoIPanel;
    private int rows;
+   
+   public boolean terrainMode(){return terrainRB.isSelected();}
+   public boolean bigPoIMode(){return bigPoIRB.isSelected();}
+   public boolean samllPoIMode(){return smallPoIRB.isSelected();}
    
    public MapControlPanel(MainPanel panel)
    {
@@ -34,6 +40,9 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       bg.add(terrainRB);
       bg.add(bigPoIRB);
       bg.add(smallPoIRB);
+      terrainRB.addActionListener(this);
+      bigPoIRB.addActionListener(this);
+      smallPoIRB.addActionListener(this);
       terrainRB.setSelected(true);
       radioPanel.add(terrainRB);
       radioPanel.add(bigPoIRB);
@@ -51,6 +60,14 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       }
       terrainButtonPanel.setVisible(true);
       add(terrainButtonPanel);
+      
+      bigPoIPanel = new JPanel();
+      bigPoIPanel.setVisible(false);
+      add(bigPoIPanel);
+      
+      smallPoIPanel = new JPanel();
+      smallPoIPanel.setVisible(false);
+      add(smallPoIPanel);
       
       addComponentListener(this);
       setVisible(true);
@@ -91,7 +108,25 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    
    public void actionPerformed(ActionEvent ae)
    {
-      for(int i = 0; i < terrainButtonArray.length; i++)
+      if(ae.getSource() == terrainRB)
+      {
+         terrainButtonPanel.setVisible(true);
+         bigPoIPanel.setVisible(false);
+         smallPoIPanel.setVisible(false);
+      }
+      else if(ae.getSource() == smallPoIRB)
+      {
+         terrainButtonPanel.setVisible(false);
+         bigPoIPanel.setVisible(false);
+         smallPoIPanel.setVisible(true);
+      }
+      else if(ae.getSource() == bigPoIRB)
+      {
+         terrainButtonPanel.setVisible(false);
+         bigPoIPanel.setVisible(true);
+         smallPoIPanel.setVisible(false);
+      }
+      else for(int i = 0; i < terrainButtonArray.length; i++)
          if(ae.getSource() == terrainButtonArray[i])
             parentPanel.setTerrainIndex(i);
    }
@@ -103,5 +138,9 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       radioPanel.setLocation(0, 0);
       terrainButtonPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
       terrainButtonPanel.setLocation(0, radioPanelHeight);
+      bigPoIPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
+      bigPoIPanel.setLocation(0, radioPanelHeight);
+      smallPoIPanel.setSize(getWidth(), getHeight() - radioPanelHeight);
+      smallPoIPanel.setLocation(0, radioPanelHeight);
    }
 }
