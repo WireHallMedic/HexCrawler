@@ -19,7 +19,7 @@ public class LinearPathTest {
       lp.add(.5, .5);
       lp.add(.5, 1.5);
       assertTrue("Point on vertical line is on line.", lp.contains(.5, 1.0));
-      assertTrue("Point close to vertical line is on line.", lp.contains(.54, 1.0));
+      assertTrue("Point close to vertical line is on line.", lp.contains(.46, 1.0));
       assertFalse("Point not close to vertical line is not on line.", lp.contains(.57, 1.0));
       assertFalse("Point above vertical line is not on line.", lp.contains(.5, 0.0));
       assertFalse("Point below vertical line is not on line.", lp.contains(.5, 2.0));
@@ -32,8 +32,40 @@ public class LinearPathTest {
       lp.add(1.5, .5);
       assertTrue("Point on horizontal line is on line.", lp.contains(1.0, .5));
       assertTrue("Point close to horizontal line is on line.", lp.contains(1.0, .54));
+      assertTrue("Point close to horizontal line is on line.", lp.contains(1.0, .46));
       assertFalse("Point not close to horizontal line is not on line.", lp.contains(1.0,.57));
       assertFalse("Point left of horizontal line is not on line.", lp.contains(0.0, .5));
       assertFalse("Point right of horizontal line is not on line.", lp.contains(2.0, .5));
+   }
+
+   @Test public void testDiagonal() 
+   {
+      LinearPath lp = new LinearPath();
+      lp.add(0.0, 0.0);
+      lp.add(1.0, 1.0);
+      assertTrue("Point on diagonal line is on line.", lp.contains(.5, .5));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .54));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .46));
+      
+      lp = new LinearPath();
+      lp.add(1.0, 1.0);
+      lp.add(0.0, 0.0);
+      assertTrue("Point on diagonal line is on line.", lp.contains(.5, .5));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .54));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .46));
+      
+      lp = new LinearPath();
+      lp.add(1.0, 0.0);
+      lp.add(0.0, 1.0);
+      assertTrue("Point on diagonal line is on line.", lp.contains(.5, .5));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .54));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .46));
+      
+      lp = new LinearPath();
+      lp.add(0.0, 1.0);
+      lp.add(1.0, 0.0);
+      assertTrue("Point on diagonal line is on line.", lp.contains(.5, .5));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .54));
+      assertTrue("Point close to diagonal line is on line.", lp.contains(.5, .46));
    }
 }
