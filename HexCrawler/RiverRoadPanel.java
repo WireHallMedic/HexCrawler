@@ -7,56 +7,55 @@ import java.awt.event.*;
 
 public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, ActionListener
 {
-   private JCheckBox[] drawCBList;
-   private JRadioButton[] roadRBList;
-   private JRadioButton[] riverRBList;
-   private JButton[] clearBList;
+   private JRadioButton selectRB;
+   private JRadioButton drawRB;
    private MainPanel parentPanel;
+   private JPanel pathPanel;
+   private JButton clearB;
+   private JButton doneB;
+   private JRadioButton roadRB;
+   private JRadioButton riverRB;
    
    public RiverRoadPanel(MainPanel parent)
    {
       super();
-      drawCBList = new JCheckBox[MAX_LINEAR_PATHS];
-      roadRBList = new JRadioButton[MAX_LINEAR_PATHS];
-      riverRBList = new JRadioButton[MAX_LINEAR_PATHS];
-      clearBList = new JButton[MAX_LINEAR_PATHS];
-      setLayout(new GridLayout(MAX_LINEAR_PATHS, 1));
-      for(int i = 0; i < MAX_LINEAR_PATHS; i++)
-         createSubpanel(i);
-   }
-   
-   private void createSubpanel(int i)
-   {
+      parentPanel = parent;
+      setLayout(new GridLayout(6, 1));
       JPanel anonPanel = new JPanel();
-      anonPanel.setLayout(new GridLayout(1, 4));
-      drawCBList[i] = new JCheckBox("Draw");
-      roadRBList[i] = new JRadioButton("Road");
-      riverRBList[i] = new JRadioButton("River");
-      clearBList[i] = new JButton("Clear");
-      ButtonGroup anonGroup = new ButtonGroup();
-      anonGroup.add(roadRBList[i]);
-      anonGroup.add(riverRBList[i]);
-      drawCBList[i].addActionListener(this);
-      roadRBList[i].addActionListener(this);
-      riverRBList[i].addActionListener(this);
-      clearBList[i].addActionListener(this);
-      anonPanel.add(drawCBList[i]);
-      anonPanel.add(roadRBList[i]);
-      anonPanel.add(riverRBList[i]);
-      anonPanel.add(clearBList[i]);
-      roadRBList[i].setSelected(true);
+      anonPanel.setLayout(new GridLayout(1, 2));
+      selectRB = new JRadioButton("Select Road/River");
+      selectRB.setSelected(true);
+      drawRB = new JRadioButton("Draw Road/River");
+      anonPanel.add(selectRB);
+      anonPanel.add(drawRB);
       add(anonPanel);
+      ButtonGroup anonGroup = new ButtonGroup();
+      anonGroup.add(selectRB);
+      anonGroup.add(drawRB);
+      
+      pathPanel = new JPanel();
+      pathPanel.setLayout(new GridLayout(1, 4));
+      roadRB = new JRadioButton("Road");
+      riverRB = new JRadioButton("River");
+      clearB = new JButton("Clear");
+      doneB = new JButton("Done");
+      roadRB.setSelected(true);
+      anonGroup = new ButtonGroup();
+      anonGroup.add(roadRB);
+      anonGroup.add(riverRB);
+      pathPanel.add(roadRB);
+      pathPanel.add(riverRB);
+      pathPanel.add(clearB);
+      pathPanel.add(doneB);
+      add(pathPanel);
    }
+
    
    public void actionPerformed(ActionEvent ae)
    {
       if(ae.getSource() instanceof JCheckBox)
       {
-         for(JCheckBox cb : drawCBList)
-         {
-            if(cb != ae.getSource())
-               cb.setSelected(false);
-         }
+
       }
    }
 }
