@@ -16,6 +16,8 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
    private JRadioButton roadRB;
    private JRadioButton riverRB;
    
+   public boolean drawMode(){return drawRB.isSelected();}
+   
    public RiverRoadPanel(MainPanel parent)
    {
       super();

@@ -82,6 +82,22 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
             iconIndex = smallPoIIndex;
          hexMap.getTile(x, y).setSmallImage(PointOfInterest.values()[iconIndex]);
       }
+      else if(mapControlPanel.pathMode())
+      {
+         // draw mode
+         if(mapControlPanel.pathDrawMode())
+         {
+         
+         }
+         else // select mode
+         {
+            LinearPath p = hexMap.getPath(mouseLocX, mouseLocY);
+            if(p != null)
+               System.out.println("Path.");
+            else
+               System.out.println("No Path.");
+         }
+      }
       mapPanel.repaint();
    }
    

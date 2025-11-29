@@ -28,7 +28,8 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    public boolean terrainMode(){return terrainRB.isSelected();}
    public boolean bigPoIMode(){return bigPoIRB.isSelected();}
    public boolean smallPoIMode(){return smallPoIRB.isSelected();}
-   public boolean riverRoadMode(){return riverRoadRB.isSelected();}
+   public boolean pathMode(){return riverRoadRB.isSelected();}
+   public boolean pathDrawMode(){return riverRoadPanel.drawMode();}
    
    public MapControlPanel(MainPanel panel)
    {

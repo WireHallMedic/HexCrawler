@@ -89,6 +89,14 @@ public class MapOfHexes implements HexCrawlerConstants
       pathList = new Vector<LinearPath>();
    }
    
+   public LinearPath getPath(double x, double y)
+   {
+      for(int i = 0; i < pathList.size(); i++)
+         if(pathList.elementAt(i).contains(x, y))
+            return pathList.elementAt(i);
+      return null;
+   }
+   
    public static MapOfHexes mock()
    {
       int w = 9;
