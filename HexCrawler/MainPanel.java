@@ -92,10 +92,16 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
          else // select mode
          {
             LinearPath p = hexMap.getPath(mouseLocX, mouseLocY);
+            mapControlPanel.setCurPath(p);
             if(p != null)
+            {
                System.out.println("Path.");
+            }
             else
+            {
                System.out.println("No Path.");
+            }
+            mapControlPanel.repaint();
          }
       }
       mapPanel.repaint();
@@ -153,6 +159,11 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    public void newMap()
    {
       hexMap = new MapOfHexes();
+      mapPanel.repaint();
+   }
+   
+   public void repaintMapPanel()
+   {
       mapPanel.repaint();
    }
 }

@@ -8,6 +8,7 @@ public class LinearPath implements HexCrawlerConstants
 {
    private Vector<double[]> pointList;
    private Color color;
+   public static final double PATH_DETECTION_WIDTH = ROAD_THICKNESS * 2;
    
    public int size(){return pointList.size();}
    public double[] getPoint(int i){return pointList.elementAt(i);}
@@ -84,7 +85,7 @@ public class LinearPath implements HexCrawlerConstants
    {
       return yt <= Math.max(y1, y2) && 
              yt >= Math.min(y1, y2) &&
-             Math.abs(x1 - xt) <= ROAD_THICKNESS;
+             Math.abs(x1 - xt) <= PATH_DETECTION_WIDTH;
    }
    
    // test when slope is zero
@@ -92,7 +93,7 @@ public class LinearPath implements HexCrawlerConstants
    {
       return xt <= Math.max(x1, x2) && 
              xt >= Math.min(x1, x2) &&
-             Math.abs(y1 - yt) <= ROAD_THICKNESS;
+             Math.abs(y1 - yt) <= PATH_DETECTION_WIDTH;
    }
    
    private boolean diagonallyContains(double x1, double y1, double x2, double y2, double xt, double yt)
@@ -106,7 +107,7 @@ public class LinearPath implements HexCrawlerConstants
       double slope = (y2 - y1) / (x2 - x1);
       double intercept = y1 - (slope * x1);
       double yAtTestX = (slope * xt) + intercept;
-      return Math.abs(yAtTestX - yt) <= ROAD_THICKNESS;
+      return Math.abs(yAtTestX - yt) <= PATH_DETECTION_WIDTH;
    }
    
    public static LinearPath mock()

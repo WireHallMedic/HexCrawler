@@ -15,13 +15,16 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
    private JButton doneB;
    private JRadioButton roadRB;
    private JRadioButton riverRB;
+   private LinearPath curPath;
    
    public boolean drawMode(){return drawRB.isSelected();}
+   public void setCurPath(LinearPath p){curPath = p;}
    
    public RiverRoadPanel(MainPanel parent)
    {
       super();
       parentPanel = parent;
+      curPath = null;
       setLayout(new GridLayout(6, 1));
       JPanel anonPanel = new JPanel();
       anonPanel.setLayout(new GridLayout(1, 2));
@@ -50,14 +53,47 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
       pathPanel.add(clearB);
       pathPanel.add(doneB);
       add(pathPanel);
+      
+      clearB.addActionListener(this);
+      doneB.addActionListener(this);
+      riverRB.addActionListener(this);
+      roadRB.addActionListener(this);
    }
 
    
    public void actionPerformed(ActionEvent ae)
    {
-      if(ae.getSource() instanceof JCheckBox)
+      if(ae.getSource() == clearB)
       {
-
+         if(curPath != null)
+         {
+            parentPanel.getMap().removePath(curPath);
+            curPath = null;
+            parentPanel.repaintMapPanel();
+         }
       }
+      else if(ae.getSource() == doneB)
+      {
+      
+      }
+      else if(ae.getSource() == roadRB)
+      {
+      
+      }
+      else if(ae.getSource() == riverRB)
+      {
+      
+      }
+      repaint();
+   }
+   
+   @Override
+   public void paint(Graphics g)
+   {
+      super.paint(g);
+      if(curPath == null)
+         pathPanel.setVisible(false);
+      else
+         pathPanel.setVisible(true);
    }
 }

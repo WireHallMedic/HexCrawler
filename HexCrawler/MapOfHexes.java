@@ -97,6 +97,11 @@ public class MapOfHexes implements HexCrawlerConstants
       return null;
    }
    
+   public void removePath(LinearPath p)
+   {
+      pathList.remove(p);
+   }
+   
    public static MapOfHexes mock()
    {
       int w = 9;

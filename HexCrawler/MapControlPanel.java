@@ -249,6 +249,11 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       }
    }
    
+   public void setCurPath(LinearPath p)
+   {
+      riverRoadPanel.setCurPath(p);
+   }
+   
    private void setAllUnfocusable()
    {
       Component[] components;
