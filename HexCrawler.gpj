@@ -43,5 +43,7 @@ s#l0
 %\011HexCrawler%sMapPanel.java
 %\011HexCrawler%sProgramControlPanel.java
 %\011HexCrawler%sRiverRoadPanel.java
+!37;l
+%\011HexCrawler%sLinearPathTest.java
 !36;m
 RunSelect	HexCrawler.HexCrawlerMain

@@ -73,7 +73,7 @@ public class LinearPath implements HexCrawlerConstants
       double y2 = pointList.elementAt(startingPoint + 1)[1];
       if(x1 == x2)
          return verticallyContains(x1, y1, x2, y2, testX, testY);
-      else if(x1 == x2)
+      else if(y1 == y2)
          return horizontallyContains(x1, y1, x2, y2, testX, testY);
       else
          return diagonallyContains(x1, y1, x2, y2, testX, testY);
@@ -82,13 +82,17 @@ public class LinearPath implements HexCrawlerConstants
    // test when slope is infinite
    private boolean verticallyContains(double x1, double y1, double x2, double y2, double xt, double yt)
    {
-      return yt <= Math.max(y1, y2) && yt >= Math.min(y1, y2);
+      return yt <= Math.max(y1, y2) && 
+             yt >= Math.min(y1, y2) &&
+             Math.abs(x1 - xt) <= ROAD_THICKNESS;
    }
    
    // test when slope is zero
    private boolean horizontallyContains(double x1, double y1, double x2, double y2, double xt, double yt)
    {
-      return xt <= Math.max(x1, x2) && xt >= Math.min(x1, x2);
+      return xt <= Math.max(x1, x2) && 
+             xt >= Math.min(x1, x2) &&
+             Math.abs(y1 - yt) <= ROAD_THICKNESS;
    }
    
    private boolean diagonallyContains(double x1, double y1, double x2, double y2, double xt, double yt)
