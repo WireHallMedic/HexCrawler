@@ -47,6 +47,29 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    
    public void tileClicked(int x, int y, boolean leftClick, double mouseLocX, double mouseLocY)
    {
+      if(mapControlPanel.pathMode())
+      {
+         // draw mode
+         if(mapControlPanel.pathDrawMode())
+         {
+            LinearPath p = mapControlPanel.getCurPath();
+            if(p != null)
+            {
+               p.add(mouseLocX, mouseLocY);
+            }
+         }
+         else // select mode
+         {
+            LinearPath p = hexMap.getPath(mouseLocX, mouseLocY);
+            mapControlPanel.setCurPath(p);
+         }
+         mapControlPanel.repaint();
+      }
+      
+      // only drawing paths is okay off of tiles
+      if(x == -1 || y == -1)
+         return;
+         
       int iconIndex = 0;
       if(explorationMode)
       {
@@ -81,24 +104,6 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
          if(leftClick)
             iconIndex = smallPoIIndex;
          hexMap.getTile(x, y).setSmallImage(PointOfInterest.values()[iconIndex]);
-      }
-      else if(mapControlPanel.pathMode())
-      {
-         // draw mode
-         if(mapControlPanel.pathDrawMode())
-         {
-            LinearPath p = mapControlPanel.getCurPath();
-            if(p != null)
-            {
-               p.add(mouseLocX, mouseLocY);
-            }
-         }
-         else // select mode
-         {
-            LinearPath p = hexMap.getPath(mouseLocX, mouseLocY);
-            mapControlPanel.setCurPath(p);
-         }
-         mapControlPanel.repaint();
       }
       mapPanel.repaint();
    }
