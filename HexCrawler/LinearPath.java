@@ -41,6 +41,8 @@ public class LinearPath implements HexCrawlerConstants
    // setting stroke size must be done on immutable objects
    public void paint(Graphics2D originalG2D, MapPanel mapPanel, double scale)
    {
+      if(size() < 2)
+         return;
       BufferedImage newBuffered = new BufferedImage(mapPanel.getWidth(), mapPanel.getHeight(), BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2d = newBuffered.createGraphics();
       int strokeSize = Math.max(1, (int)(ROAD_THICKNESS * scale));

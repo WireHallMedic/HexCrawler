@@ -89,6 +89,19 @@ public class MapOfHexes implements HexCrawlerConstants
       pathList = new Vector<LinearPath>();
    }
    
+   // delete paths of less than 2 points
+   public void cleanPaths()
+   {
+      for(int i = 0; i < pathList.size(); i++)
+      {
+         if(pathList.elementAt(i).size() < 2)
+         {
+            pathList.removeElementAt(i);
+            i--;
+         }
+      }
+   }
+   
    public LinearPath getPath(double x, double y)
    {
       for(int i = 0; i < pathList.size(); i++)

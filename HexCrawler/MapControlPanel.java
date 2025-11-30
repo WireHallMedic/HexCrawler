@@ -264,4 +264,9 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
             component.setFocusable(false);
       }
    }
+   
+   public LinearPath getCurPath()
+   {
+      return riverRoadPanel.getCurPath();
+   }
 }

@@ -18,7 +18,7 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
    private LinearPath curPath;
    
    public boolean drawMode(){return drawRB.isSelected();}
-   public void setCurPath(LinearPath p){curPath = p;}
+   public LinearPath getCurPath(){return curPath;}
    
    public RiverRoadPanel(MainPanel parent)
    {
@@ -58,6 +58,7 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
       doneB.addActionListener(this);
       riverRB.addActionListener(this);
       roadRB.addActionListener(this);
+      drawRB.addActionListener(this);
    }
 
    
@@ -73,7 +74,9 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
       }
       else if(ae.getSource() == doneB)
       {
-      
+         curPath = null;
+         parentPanel.getMap().cleanPaths();
+         selectRB.setSelected(true);
       }
       else if(ae.getSource() == roadRB)
       {
@@ -89,8 +92,32 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
             curPath.setColor(WATER_COLOR);
          }
       }
+      // start drawing new path
+      else if(ae.getSource() == drawRB)
+      {
+         curPath = new LinearPath();
+         parentPanel.getMap().addPath(curPath);
+         if(roadRB.isSelected())
+            curPath.setColor(ROAD_COLOR);
+         else
+            curPath.setColor(WATER_COLOR);
+      }
+      else if(ae.getSource() == selectRB)
+      {
+         doneB.doClick();
+      }
       parentPanel.repaintMapPanel();
       repaint();
+   }
+   
+   
+   public void setCurPath(LinearPath p)
+   {
+      curPath = p;
+      if(curPath == null || curPath.getColor().getRGB() == ROAD_COLOR.getRGB())
+         roadRB.setSelected(true);
+      else
+         riverRB.setSelected(true);
    }
    
    @Override

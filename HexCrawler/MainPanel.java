@@ -87,22 +87,18 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
          // draw mode
          if(mapControlPanel.pathDrawMode())
          {
-         
+            LinearPath p = mapControlPanel.getCurPath();
+            if(p != null)
+            {
+               p.add(mouseLocX, mouseLocY);
+            }
          }
          else // select mode
          {
             LinearPath p = hexMap.getPath(mouseLocX, mouseLocY);
             mapControlPanel.setCurPath(p);
-            if(p != null)
-            {
-               System.out.println("Path.");
-            }
-            else
-            {
-               System.out.println("No Path.");
-            }
-            mapControlPanel.repaint();
          }
+         mapControlPanel.repaint();
       }
       mapPanel.repaint();
    }
