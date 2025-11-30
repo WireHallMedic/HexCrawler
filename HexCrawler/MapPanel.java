@@ -174,7 +174,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
             }
          }
       }
-      if(!parentPanel.explorationMode || tile.isExplored())
+      if(!parentPanel.explorationMode || tile.isSeen())
       {
          // draw big PoI
          if(tile.getBigImage() != null)

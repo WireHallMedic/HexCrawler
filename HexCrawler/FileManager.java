@@ -4,13 +4,17 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.event.*;
 import java.io.*;
+import java.awt.*;
 
 public class FileManager
 {
+   private static String lastFileName = "";
+   private static final String FILE_EXTENSION = ".hcm";
+   
    public static void load(MainPanel mainPanel)
    {
 		Scanner inFile = null;
-      String fileName = "HexCrawler.dat";
+      String fileName = "HexCrawler" + FILE_EXTENSION;
       Vector<String> strList = new Vector<String>();
 		try
 		{
@@ -33,7 +37,7 @@ public class FileManager
       try
       {
          Vector<String> saveList = mainPanel.getMap().serialize();
-         PrintWriter writer = new PrintWriter("HexCrawler.dat", "UTF-8");
+         PrintWriter writer = new PrintWriter("HexCrawler" + FILE_EXTENSION, "UTF-8");
          for(String str : saveList)
             writer.println(str);
          writer.close();
@@ -44,4 +48,5 @@ public class FileManager
 			JOptionPane.showMessageDialog(null, errorMessage, "Exception Occured", JOptionPane.ERROR_MESSAGE);
       }
    }
+   
 }
