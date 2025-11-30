@@ -12,7 +12,6 @@ public class MapHex implements HexCrawlerConstants
 	private HexImage smallImage;
 	private boolean seen;
 	private boolean explored;
-   private static final String DELIMITER = "@@";
 
 
 	public Color getBackground(){return background;}

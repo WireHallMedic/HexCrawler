@@ -112,6 +112,34 @@ public class LinearPath implements HexCrawlerConstants
       return Math.abs(yAtTestX - yt) <= PATH_DETECTION_WIDTH;
    }
    
+   public String serialize()
+   {
+      String outStr = color.getRGB() + "";
+      for(int i = 0; i < size(); i++)
+      {
+         outStr += DELIMITER + pointList.elementAt(i)[0] + "," + pointList.elementAt(i)[1];
+      }
+      return outStr;
+   }
+   
+   public void deserialize(String str)
+   {
+      String[] strList = str.split(DELIMITER);
+      try
+      {
+         setColor(new Color(Integer.parseInt(strList[0])));
+         for(int i = 1; i < strList.length; i++)
+         {
+            String[] loc = strList[i].split(",");
+            add(Double.parseDouble(loc[0]), Double.parseDouble(loc[1]));
+         }
+      }
+      catch(Exception ex)
+      {
+         System.out.println("Could not deserialize LinearPath: " + ex.toString());
+      }
+   }
+   
    public static LinearPath mock()
    {
       LinearPath lp = new LinearPath();

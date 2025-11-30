@@ -10,6 +10,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
 {
    private double scale = 100.0;
    private MainPanel parentPanel;
+   private static final MapHex OOB_HEX = new  MapHex(Color.BLACK, null);
    
    public MapPanel(MapOfHexes map, MainPanel parent)
    {
@@ -131,6 +132,17 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          for(int y = 0; y < h; y++)
             if(!parentPanel.getMap().getTile(x, y).isSeen())
                paintHex(g2d, parentPanel.getMap().getTile(x, y), x, y);
+      // paint over OOB paths
+      for(int x = 0; x < w; x++)
+      {
+         paintHex(g2d, OOB_HEX, x, -1);
+         paintHex(g2d, OOB_HEX, x, parentPanel.getMap().getHeight());
+      }
+      for(int y = 0; y < h; y++)
+      {
+         paintHex(g2d, OOB_HEX, -1, y);
+         paintHex(g2d, OOB_HEX, parentPanel.getMap().getWidth(), y);
+      }
    }
    
    private void paintHex(Graphics2D g2d, MapHex tile, int xPos, int yPos)

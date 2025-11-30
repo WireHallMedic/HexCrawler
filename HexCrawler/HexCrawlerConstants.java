@@ -17,6 +17,7 @@ public interface HexCrawlerConstants
    public static final double[] HEX_POINTS_Y = {0.0, .25, .75, 1.0, .75, .25};
    public static final int MAX_LINEAR_PATHS = 12;
    public static final double ROAD_THICKNESS = .05;
+   public static final String DELIMITER = "@@";
    
    public static final Color BEACH_COLOR = new Color(253, 251, 151);
    public static final Color GRASS_COLOR = new Color(149, 198, 99);

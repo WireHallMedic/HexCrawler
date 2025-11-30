@@ -65,6 +65,8 @@ public class MapOfHexes implements HexCrawlerConstants
       for(int x = 0; x < width; x++)
       for(int y = 0; y < height; y++)
          outList.add(tileArray[x][y].serialize());
+      for(LinearPath path : pathList)
+         outList.add(path.serialize());
       return outList;
    }
    
@@ -73,9 +75,17 @@ public class MapOfHexes implements HexCrawlerConstants
       int w = Integer.parseInt(strList.elementAt(0));
       int h = Integer.parseInt(strList.elementAt(1));
       setSize(w, h);
-      for(int i = 0; i < strList.size() - 2; i++)
+      pathList = new Vector<LinearPath>();
+      int numOfHexes = w * h;
+      for(int i = 0; i < numOfHexes; i++)
       {
          tileArray[i / width][i % height].deserialize(strList.elementAt(i + 2));
+      }
+      for(int i = numOfHexes + 2; i < strList.size(); i++)
+      {
+         LinearPath newPath = new LinearPath();
+         newPath.deserialize(strList.elementAt(i));
+         addPath(newPath);
       }
    }
    
