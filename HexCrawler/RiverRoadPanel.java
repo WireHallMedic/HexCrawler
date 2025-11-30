@@ -69,7 +69,6 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
          {
             parentPanel.getMap().removePath(curPath);
             curPath = null;
-            parentPanel.repaintMapPanel();
          }
       }
       else if(ae.getSource() == doneB)
@@ -78,12 +77,19 @@ public class RiverRoadPanel extends JPanel implements HexCrawlerConstants, Actio
       }
       else if(ae.getSource() == roadRB)
       {
-      
+         if(curPath != null)
+         {
+            curPath.setColor(ROAD_COLOR);
+         }
       }
       else if(ae.getSource() == riverRB)
       {
-      
+         if(curPath != null)
+         {
+            curPath.setColor(WATER_COLOR);
+         }
       }
+      parentPanel.repaintMapPanel();
       repaint();
    }
    
