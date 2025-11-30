@@ -11,6 +11,7 @@ public class HexCrawlerMain extends JFrame
       super();
       ImagePalette.load("./res");
       setDefaultCloseOperation(EXIT_ON_CLOSE);
+      setTitle("Hex Crawler");
       
       mainPanel = new MainPanel();
       add(mainPanel);

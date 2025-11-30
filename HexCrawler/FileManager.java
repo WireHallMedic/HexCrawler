@@ -8,13 +8,15 @@ import java.awt.*;
 
 public class FileManager
 {
-   private static String lastFileName = "";
    private static final String FILE_EXTENSION = ".hcm";
    
    public static void load(MainPanel mainPanel)
    {
 		Scanner inFile = null;
       String fileName = "HexCrawler" + FILE_EXTENSION;
+      fileName = getFileName(mainPanel);
+      if(fileName.equals(""))
+         return;
       Vector<String> strList = new Vector<String>();
 		try
 		{
@@ -37,7 +39,12 @@ public class FileManager
       try
       {
          Vector<String> saveList = mainPanel.getMap().serialize();
-         PrintWriter writer = new PrintWriter("HexCrawler" + FILE_EXTENSION, "UTF-8");
+         String fileName = getFileName(mainPanel);
+         if(fileName.equals(""))
+            return;
+         if(!fileName.contains(FILE_EXTENSION))
+            fileName = fileName + FILE_EXTENSION;
+         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
          for(String str : saveList)
             writer.println(str);
          writer.close();
@@ -47,6 +54,21 @@ public class FileManager
 			String errorMessage = ex.toString();
 			JOptionPane.showMessageDialog(null, errorMessage, "Exception Occured", JOptionPane.ERROR_MESSAGE);
       }
+   }
+   
+   public static String getFileName(Component component)
+   {
+      String fileName = "";
+      JFileChooser fc;
+      fc = new JFileChooser(".");
+      fc.setDialogTitle("Choose file.");
+      fc.setApproveButtonText("Select");
+      int returnVal = fc.showOpenDialog(component);
+      if(returnVal == JFileChooser.APPROVE_OPTION)
+      {
+         fileName = fc.getSelectedFile().getName();
+      }
+      return fileName;
    }
    
 }
