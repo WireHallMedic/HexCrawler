@@ -30,10 +30,24 @@ public class ProgramControlPanel extends JPanel implements ActionListener
    public void actionPerformed(ActionEvent ae)
    {
       if(ae.getSource() == newB)
-         parentPanel.newMap();
+         parentPanel.newMap(getNewMapSize());
       else if(ae.getSource() == saveB)
          parentPanel.save();
       else if(ae.getSource() == loadB)
          parentPanel.load();
+   }
+   
+   private int[] getNewMapSize()
+   {
+      int[] returnVals = {7, 7};
+      String width = JOptionPane.showInputDialog("Width for new map:");
+      String height= JOptionPane.showInputDialog("Height for new map");
+      try
+      {
+         returnVals[0] = Integer.parseInt(width);
+         returnVals[1] = Integer.parseInt(height);
+      }
+      catch(Exception ex){}
+      return returnVals;
    }
 }

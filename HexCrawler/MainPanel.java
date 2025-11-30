@@ -152,9 +152,9 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       mapPanel.repaint();
    }
    
-   public void newMap()
+   public void newMap(int[] newSize)
    {
-      hexMap = new MapOfHexes();
+      hexMap = new MapOfHexes(newSize[0], newSize[1]);
       mapPanel.repaint();
    }
    
