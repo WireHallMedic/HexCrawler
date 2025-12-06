@@ -63,7 +63,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       double mouseLocX = me.getX() / scale;
       double mouseLocY = me.getY() / scale;
       double radius = mapToken.getRadius();
-      if(mapToken.isInRadius(mouseLocX - radius, mouseLocY - radius))
+      if(mapToken.isInRadius(mouseLocX, mouseLocY))
       {
          draggingToken = true;
       }
@@ -183,7 +183,7 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       {
          int xLoc = (int)((mapToken.getXLoc() - mapToken.getRadius()) * scale);
          int yLoc = (int)((mapToken.getYLoc() - mapToken.getRadius())* scale);
-         int diameter = (int)(mapToken.getRadius() * scale);
+         int diameter = (int)(mapToken.getRadius() * scale * 2);
          g2d.setColor(TOKEN_COLOR);
          g2d.fillOval(xLoc, yLoc, diameter, diameter);
          g2d.setColor(Color.BLACK);

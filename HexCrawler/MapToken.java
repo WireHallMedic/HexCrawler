@@ -40,7 +40,10 @@ public class MapToken
    {
       double xOffset = xLoc - x;
       double yOffset = yLoc - y;
+      System.out.println("xOffset^2 = " + (xOffset * xOffset));
+      System.out.println("yOffset^2 = " + (yOffset * yOffset));
+      System.out.println("radius^2 =  " + (radius * radius));
       
-      return (radius * radius) <= (xOffset * xOffset) + (yOffset * yOffset);  
+      return (radius * radius) >= (xOffset * xOffset) + (yOffset * yOffset);  
    }
 }
