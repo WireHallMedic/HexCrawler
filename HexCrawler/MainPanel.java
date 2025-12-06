@@ -15,6 +15,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
    private int bigPoIIndex;
    private int smallPoIIndex;
    public static boolean explorationMode = false;
+   public static boolean showToken = false;
    private boolean shiftDown = false;
    
    public void setTerrainIndex(int ci){terrainIndex = ci;}
@@ -31,7 +32,7 @@ public class MainPanel extends JPanel implements ComponentListener, HexCrawlerCo
       bigPoIIndex = 0;
       smallPoIIndex = 0;
       setLayout(null);
-      mapPanel = new MapPanel(hexMap, this);
+      mapPanel = new MapPanel(this);
       programControlPanel = new ProgramControlPanel(this);
       mapControlPanel = new MapControlPanel(this);
       

@@ -11,20 +11,20 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    private double scale = 100.0;
    private MainPanel parentPanel;
    private static final MapHex OOB_HEX = new  MapHex(Color.BLACK, null);
-   private MapToken mapToken;
    private boolean draggingToken;
    
-   public MapPanel(MapOfHexes map, MainPanel parent)
+   public MapPanel(MainPanel parent)
    {
       super();
       setBackground(Color.BLACK);
       parentPanel = parent;
-      mapToken = new MapToken();
       draggingToken = false;
       
       addMouseListener(this);
       addMouseMotionListener(this);
    }
+   
+   private MapToken getMapToken(){return parentPanel.getMap().getMapToken();}
    
    public void mouseReleased(MouseEvent me)
    {
@@ -62,8 +62,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    {
       double mouseLocX = me.getX() / scale;
       double mouseLocY = me.getY() / scale;
-      double radius = mapToken.getRadius();
-      if(mapToken.isInRadius(mouseLocX, mouseLocY))
+      double radius = getMapToken().getRadius();
+      if(parentPanel.showToken && getMapToken().isInRadius(mouseLocX, mouseLocY))
       {
          draggingToken = true;
       }
@@ -75,8 +75,8 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       {
          double mouseLocX = me.getX() / scale;
          double mouseLocY = me.getY() / scale;
-         double radius = mapToken.getRadius();
-         mapToken.setLoc(mouseLocX, mouseLocY);
+         double radius = getMapToken().getRadius();
+         getMapToken().setLoc(mouseLocX, mouseLocY);
          repaint();
       }
    }
@@ -179,11 +179,11 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
          paintHex(g2d, OOB_HEX, parentPanel.getMap().getWidth(), y);
       }
       // paint token
-      if(true)
+      if(parentPanel.showToken)
       {
-         int xLoc = (int)((mapToken.getXLoc() - mapToken.getRadius()) * scale);
-         int yLoc = (int)((mapToken.getYLoc() - mapToken.getRadius())* scale);
-         int diameter = (int)(mapToken.getRadius() * scale * 2);
+         int xLoc = (int)((getMapToken().getXLoc() - getMapToken().getRadius()) * scale);
+         int yLoc = (int)((getMapToken().getYLoc() - getMapToken().getRadius())* scale);
+         int diameter = (int)(getMapToken().getRadius() * scale * 2);
          g2d.setColor(TOKEN_COLOR);
          g2d.fillOval(xLoc, yLoc, diameter, diameter);
          g2d.setColor(Color.BLACK);

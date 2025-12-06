@@ -8,23 +8,27 @@ public class MapOfHexes implements HexCrawlerConstants
 	private int width;
 	private int height;
    private Vector<LinearPath> pathList;
+   private MapToken mapToken;
 
 
 	public MapHex[][] getTileArray(){return tileArray;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
    public Vector<LinearPath> getPathList(){return pathList;}
+   public MapToken getMapToken(){return mapToken;}
 
 
 	public void setTileArray(MapHex[][] t){tileArray = t;}
 	public void setWidth(int w){width = w;}
 	public void setHeight(int h){height = h;}
+   public void setMapToken(MapToken mt){mapToken = mt;}
 
 
    public MapOfHexes(int w, int h)
    {
       setSize(w, h);
       pathList = new Vector<LinearPath>();
+      mapToken = new MapToken();
    }
    
    public MapOfHexes()
@@ -65,6 +69,7 @@ public class MapOfHexes implements HexCrawlerConstants
       for(int x = 0; x < width; x++)
       for(int y = 0; y < height; y++)
          outList.add(tileArray[x][y].serialize());
+      outList.add(mapToken.serialize());
       for(LinearPath path : pathList)
          outList.add(path.serialize());
       return outList;
@@ -81,7 +86,8 @@ public class MapOfHexes implements HexCrawlerConstants
       {
          tileArray[i / width][i % height].deserialize(strList.elementAt(i + 2));
       }
-      for(int i = numOfHexes + 2; i < strList.size(); i++)
+      mapToken.deserialize(strList.elementAt(numOfHexes + 2));
+      for(int i = numOfHexes + 3; i < strList.size(); i++)
       {
          LinearPath newPath = new LinearPath();
          newPath.deserialize(strList.elementAt(i));

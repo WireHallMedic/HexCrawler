@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MapToken
+public class MapToken implements HexCrawlerConstants
 {
 	private double xLoc;
 	private double yLoc;
@@ -33,17 +33,33 @@ public class MapToken
    {
       xLoc = .5;
       yLoc = .5;
-      radius = .5;
+      radius = .25;
    }
    
    public boolean isInRadius(double x, double y)
    {
       double xOffset = xLoc - x;
       double yOffset = yLoc - y;
-      System.out.println("xOffset^2 = " + (xOffset * xOffset));
-      System.out.println("yOffset^2 = " + (yOffset * yOffset));
-      System.out.println("radius^2 =  " + (radius * radius));
       
       return (radius * radius) >= (xOffset * xOffset) + (yOffset * yOffset);  
+   }
+   
+   public String serialize()
+   {
+      return xLoc + DELIMITER + yLoc;
+   }
+   
+   public void deserialize(String str)
+   {
+      String[] vals = str.split(DELIMITER);
+      try
+      {
+         xLoc = Double.parseDouble(vals[0]);
+         yLoc = Double.parseDouble(vals[1]);
+      }
+      catch(Exception ex)
+      {
+         System.out.println("Failed to load token from file.");
+      }
    }
 }

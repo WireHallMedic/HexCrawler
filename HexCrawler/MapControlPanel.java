@@ -113,6 +113,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       explorationPanel.add(new JLabel("Shift-click to obscure"));
       tokenCB = new JCheckBox("Token");
       explorationPanel.add(tokenCB);
+      tokenCB.addActionListener(this);
       explorationPanel.setVisible(false);
       add(explorationPanel);
       
@@ -238,6 +239,11 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
             parentPanel.setSmallPoIIndex(i);
             return;
          }
+      }
+      if(ae.getSource() == tokenCB)
+      {
+         parentPanel.showToken = tokenCB.isSelected();
+         parentPanel.repaintMapPanel();
       }
    }
    
