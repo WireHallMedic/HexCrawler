@@ -6,12 +6,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener
+public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListener, MouseMotionListener
 {
    private double scale = 100.0;
    private MainPanel parentPanel;
    private static final MapHex OOB_HEX = new  MapHex(Color.BLACK, null);
    private MapToken mapToken;
+   private boolean draggingToken;
    
    public MapPanel(MapOfHexes map, MainPanel parent)
    {
@@ -19,40 +20,72 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       setBackground(Color.BLACK);
       parentPanel = parent;
       mapToken = new MapToken();
+      draggingToken = false;
       
       addMouseListener(this);
+      addMouseMotionListener(this);
    }
    
    public void mouseReleased(MouseEvent me)
    {
-      boolean leftClick = me.getButton() == MouseEvent.BUTTON1;
+      if(!draggingToken)
+      {
+         boolean leftClick = me.getButton() == MouseEvent.BUTTON1;
+         double mouseLocX = me.getX() / scale;
+         double mouseLocY = me.getY() / scale;
+         int lastX = -1;
+         int lastY = -1;
+         double lastDist = 1000000.0;
+         for(int x = 0; x < parentPanel.getMap().getWidth(); x++)
+         for(int y = 0; y < parentPanel.getMap().getHeight(); y++)
+         {
+            double newX = mouseLocX - (getXInset(x, y) + (HEX_WIDTH / 2));
+            double newY = mouseLocY - (getYInset(x, y) + (HEX_HEIGHT / 2));
+            double newDist = (newX * newX) + (newY * newY);
+            if(newDist < lastDist && newDist < (R_LONG * R_LONG))
+            {
+               lastX = x;
+               lastY = y;
+               lastDist = newDist;
+            }
+         }
+         if(lastDist < 1000000.0)
+            parentPanel.tileClicked(lastX, lastY, leftClick, mouseLocX, mouseLocY);
+         else
+            parentPanel.tileClicked(-1, -1, leftClick, mouseLocX, mouseLocY);
+      }
+      draggingToken = false;
+   }
+   
+   
+   public void mousePressed(MouseEvent me)
+   {
       double mouseLocX = me.getX() / scale;
       double mouseLocY = me.getY() / scale;
-      int lastX = -1;
-      int lastY = -1;
-      double lastDist = 1000000.0;
-      for(int x = 0; x < parentPanel.getMap().getWidth(); x++)
-      for(int y = 0; y < parentPanel.getMap().getHeight(); y++)
+      double radius = mapToken.getRadius();
+      if(mapToken.isInRadius(mouseLocX - radius, mouseLocY - radius))
       {
-         double newX = mouseLocX - (getXInset(x, y) + (HEX_WIDTH / 2));
-         double newY = mouseLocY - (getYInset(x, y) + (HEX_HEIGHT / 2));
-         double newDist = (newX * newX) + (newY * newY);
-         if(newDist < lastDist && newDist < (R_LONG * R_LONG))
-         {
-            lastX = x;
-            lastY = y;
-            lastDist = newDist;
-         }
+         draggingToken = true;
       }
-      if(lastDist < 1000000.0)
-         parentPanel.tileClicked(lastX, lastY, leftClick, mouseLocX, mouseLocY);
-      else
-         parentPanel.tileClicked(-1, -1, leftClick, mouseLocX, mouseLocY);
    }
+   
+   public void mouseDragged(MouseEvent me)
+   {
+      if(draggingToken)
+      {
+         double mouseLocX = me.getX() / scale;
+         double mouseLocY = me.getY() / scale;
+         double radius = mapToken.getRadius();
+         mapToken.setLoc(mouseLocX, mouseLocY);
+         repaint();
+      }
+   }
+   
+   
    public void mouseClicked(MouseEvent me){}
-   public void mousePressed(MouseEvent me){}
    public void mouseEntered(MouseEvent me){}
    public void mouseExited(MouseEvent me){}
+   public void mouseMoved(MouseEvent me){}
    
    private double[] indentX(int xPos, int yPos, double[] arr)
    {
@@ -148,9 +181,9 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       // paint token
       if(true)
       {
-         int xLoc = 100;//(int)(mapToken.getXLoc() * scale);
-         int yLoc = 100;//(int)(mapToken.getYLoc() * scale);
-         int diameter = (int)(mapToken.getDiameter() * scale);
+         int xLoc = (int)((mapToken.getXLoc() - mapToken.getRadius()) * scale);
+         int yLoc = (int)((mapToken.getYLoc() - mapToken.getRadius())* scale);
+         int diameter = (int)(mapToken.getRadius() * scale);
          g2d.setColor(TOKEN_COLOR);
          g2d.fillOval(xLoc, yLoc, diameter, diameter);
          g2d.setColor(Color.BLACK);
