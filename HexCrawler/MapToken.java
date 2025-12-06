@@ -10,37 +10,37 @@ public class MapToken
 {
 	private double xLoc;
 	private double yLoc;
-	private double radius;
+	private double diameter;
 
 
 	public double getXLoc(){return xLoc;}
 	public double getYLoc(){return yLoc;}
-	public double getRadius(){return radius;}
+	public double getDiameter(){return diameter;}
 
 
 	public void setXLoc(double x){xLoc = x;}
 	public void setYLoc(double y){yLoc = y;}
-	public void setRadius(double r){radius = r;}
+	public void setDiameter(double r){diameter = r;}
 
    
    public void setLoc(double x, double y)
    {
       xLoc = x;
       yLoc = y;
-      radius = 1.0;
    }
    
    public MapToken()
    {
-      xLoc = 1.0;
-      yLoc = 1.0;
+      xLoc = 0.0;
+      yLoc = 0.0;
+      diameter = .5;
    }
    
-   public boolean isInRadius(double x, double y)
+   public boolean isInDiameter(double x, double y)
    {
       double xOffset = xLoc - x;
       double yOffset = yLoc - y;
       
-      return (radius * radius) <= (xOffset * xOffset) + (yOffset * yOffset);  
+      return (diameter * diameter) <= (xOffset * xOffset) + (yOffset * yOffset);  
    }
 }

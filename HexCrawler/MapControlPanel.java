@@ -31,6 +31,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    public boolean smallPoIMode(){return smallPoIRB.isSelected();}
    public boolean pathMode(){return riverRoadRB.isSelected();}
    public boolean pathDrawMode(){return riverRoadPanel.drawMode();}
+   public boolean showToken(){return tokenCB.isSelected();}
    
    public MapControlPanel(MainPanel panel)
    {
@@ -111,7 +112,6 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       explorationPanel.add(new JLabel("Right-click to explore"));
       explorationPanel.add(new JLabel("Shift-click to obscure"));
       tokenCB = new JCheckBox("Token");
-      tokenCB.addActionListener(this);
       explorationPanel.add(tokenCB);
       explorationPanel.setVisible(false);
       add(explorationPanel);

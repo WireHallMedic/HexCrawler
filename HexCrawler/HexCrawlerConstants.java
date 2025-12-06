@@ -33,6 +33,7 @@ public interface HexCrawlerConstants
    public static final Color ROAD_COLOR = new Color(73, 32, 0);
    public static final Color MOUNTAIN_FOREST_COLOR = new Color(102, 118, 33);
    public static final Color HILL_FOREST_COLOR = new Color(72, 138, 33);
+   public static final Color TOKEN_COLOR = new Color(0x5D3FD3);
    
    public enum Terrain
    {

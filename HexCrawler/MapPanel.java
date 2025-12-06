@@ -11,12 +11,14 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
    private double scale = 100.0;
    private MainPanel parentPanel;
    private static final MapHex OOB_HEX = new  MapHex(Color.BLACK, null);
+   private MapToken mapToken;
    
    public MapPanel(MapOfHexes map, MainPanel parent)
    {
       super();
       setBackground(Color.BLACK);
       parentPanel = parent;
+      mapToken = new MapToken();
       
       addMouseListener(this);
    }
@@ -142,6 +144,17 @@ public class MapPanel extends JPanel implements HexCrawlerConstants, MouseListen
       {
          paintHex(g2d, OOB_HEX, -1, y);
          paintHex(g2d, OOB_HEX, parentPanel.getMap().getWidth(), y);
+      }
+      // paint token
+      if(true)
+      {
+         int xLoc = 100;//(int)(mapToken.getXLoc() * scale);
+         int yLoc = 100;//(int)(mapToken.getYLoc() * scale);
+         int diameter = (int)(mapToken.getDiameter() * scale);
+         g2d.setColor(TOKEN_COLOR);
+         g2d.fillOval(xLoc, yLoc, diameter, diameter);
+         g2d.setColor(Color.BLACK);
+         g2d.drawOval(xLoc, yLoc, diameter, diameter);
       }
    }
    
