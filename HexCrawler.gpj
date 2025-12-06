@@ -13,8 +13,8 @@ s#i0
 s#k0
 s#j0
 s#l0
-!78;u
-a0	b68	c255	f%\011HexCrawler.jar	g%\011HexCrawler.zip	hManifest-Version\0111.0!4185;g
+!121;u
+a0	b68	c255	f%\011HexCrawler.jar	g%\011HexCrawler.zip	hManifest-Version\0111.0\011Main-Class\011HexCrawler.HexCrawlerMain!4216;g
 %\011HexCrawler%sFileManager.java
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
@@ -27,6 +27,7 @@ a0	b68	c255	f%\011HexCrawler.jar	g%\011HexCrawler.zip	hManifest-Version\0111.0!4
 %\011HexCrawler%sMapHex.java
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
+%\011HexCrawler%sMapToken.java
 %\011HexCrawler%sProgramControlPanel.java
 %\011HexCrawler%sRiverRoadPanel.java
 %\011res%sbadlands.png
@@ -165,7 +166,7 @@ a0	b68	c255	f%\011HexCrawler.jar	g%\011HexCrawler.zip	hManifest-Version\0111.0!4
 %\011res%swhitetree.png
 %\011res%swindmill.png
 %\011res%sx.png
-!4185;f
+!4216;f
 %\011HexCrawler%sFileManager.java
 %\011HexCrawler%sHexCrawlerConstants.java
 %\011HexCrawler%sHexCrawlerMain.java
@@ -178,6 +179,7 @@ a0	b68	c255	f%\011HexCrawler.jar	g%\011HexCrawler.zip	hManifest-Version\0111.0!4
 %\011HexCrawler%sMapHex.java
 %\011HexCrawler%sMapOfHexes.java
 %\011HexCrawler%sMapPanel.java
+%\011HexCrawler%sMapToken.java
 %\011HexCrawler%sProgramControlPanel.java
 %\011HexCrawler%sRiverRoadPanel.java
 %\011res%sbadlands.png
