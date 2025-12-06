@@ -17,6 +17,7 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
    private JRadioButton smallPoIRB;
    private JRadioButton riverRoadRB;
    private JRadioButton explorationRB;
+   private JCheckBox tokenCB;
    private JPanel terrainPanel;
    private JPanel bigPoIPanel;
    private JPanel smallPoIPanel;
@@ -109,6 +110,9 @@ public class MapControlPanel extends JPanel implements HexCrawlerConstants, Comp
       explorationPanel.add(new JLabel("Left-click to see"));
       explorationPanel.add(new JLabel("Right-click to explore"));
       explorationPanel.add(new JLabel("Shift-click to obscure"));
+      tokenCB = new JCheckBox("Token");
+      tokenCB.addActionListener(this);
+      explorationPanel.add(tokenCB);
       explorationPanel.setVisible(false);
       add(explorationPanel);
       
